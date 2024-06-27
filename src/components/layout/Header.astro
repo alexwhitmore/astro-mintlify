@@ -1,5 +1,7 @@
 ---
-import { Command, EllipsisVertical, Moon, Orbit, Search } from 'lucide-react'
+import { Command, Moon, Orbit, Search } from 'lucide-react'
+import { SearchDialog } from '../SearchDialog'
+import { SettingsDropdown } from '../SettingsDropdown'
 import SubHeader from './SubHeader.astro'
 ---
 
@@ -38,12 +40,8 @@ import SubHeader from './SubHeader.astro'
       </div>
 
       <div class='flex gap-2 lg:hidden'>
-        <a href='/' aria-label='Search'>
-          <Search className='w-5 h-5' />
-        </a>
-        <a href='/' aria-label='Menu'>
-          <EllipsisVertical className='w-5 h-5' />
-        </a>
+        <SearchDialog client:load aria-label='Search dialog' />
+        <SettingsDropdown client:load aria-label='Settings menu' />
       </div>
 
       <div class='hidden lg:flex gap-2 items-center'>

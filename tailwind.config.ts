@@ -18,6 +18,7 @@ const config = {
           DEFAULT: 'hsl(var(--primary))',
           hover: 'hsl(var(--primary-hover))',
         },
+        popover: 'hsl(var(--popover))',
       },
       fontFamily: {
         sans: ['Inter', ...fontFamily.sans],
