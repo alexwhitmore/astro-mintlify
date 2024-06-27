@@ -1,0 +1,49 @@
+---
+interface Props {
+  headers: Array<{ level: number; text: string; id: string }>
+}
+
+const { headers } = Astro.props
+---
+
+<aside class='hidden xl:block mt-[150px] fixed xl:left-[calc(50%+460px)]'>
+  <p class='text-base font-semibold text-nowrap'>On this page</p>
+  {
+    headers && headers.length > 0 ? (
+      <ul class='mt-2 pl-1'>
+        {headers.map((header) => (
+          <li
+            class='toc-link border-l pl-2 hover:border-primary py-1'
+            style={`margin-left: ${(header.level - 2) * 12}px;`}
+            data-id={header.id}>
+            <a href={`#${header.id}`}>{header.text}</a>
+          </li>
+        ))}
+      </ul>
+    ) : null
+  }
+</aside>
+
+<script>
+  function updateActiveLink() {
+    const path = window.location.hash.slice(1)
+    const listItems = document.querySelectorAll('.toc-link')
+
+    listItems.forEach((item) => {
+      if (item instanceof HTMLElement) {
+        const id = item.dataset.id
+        if (id === path) {
+          item.classList.add('border-l', 'border-primary')
+        } else {
+          item.classList.remove('border-primary')
+        }
+      }
+    })
+  }
+
+  updateActiveLink()
+  window.addEventListener('hashchange', updateActiveLink)
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateActiveLink)
+  })
+</script>

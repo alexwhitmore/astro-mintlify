@@ -1,0 +1,66 @@
+---
+import { Command, EllipsisVertical, Moon, Orbit, Search } from 'lucide-react'
+import SubHeader from './SubHeader.astro'
+---
+
+<header
+  class='fixed top-0 left-0 right-0 z-50 bg-background-blur backdrop-blur-lg'>
+  <nav class='px-4 h-14 lg:px-0'>
+    <div class='flex justify-between items-center h-full border-b lg:px-10'>
+      <div>
+        <a
+          href='/'
+          class='flex gap-2 items-center'
+          aria-label='Astro documentation'>
+          <Orbit className='w-6 h-6' />
+          <h2 class='text-xl'>
+            <span class='font-extrabold'>astro</span>
+            <span class='font-normal'>docs</span>
+          </h2>
+        </a>
+      </div>
+
+      <div class='hidden lg:flex lg:flex-1 lg:justify-center mx-4'>
+        <div
+          class='relative w-full min-w-[140px] max-w-md'
+          style='width: 28vw;'>
+          <Search
+            className='absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-muted'
+          />
+          <input
+            type='search'
+            class='flex h-9 w-full rounded-lg border bg-transparent pl-10 pr-10 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary disabled:cursor-not-allowed disabled:opacity-50'
+            placeholder='Search or ask...'
+          />
+          <Command
+            className='absolute right-3 top-1/2 transform -translate-y-1/2 w-3 h-3 text-muted'
+          />
+        </div>
+      </div>
+
+      <div class='flex gap-2 lg:hidden'>
+        <a href='/' aria-label='Search'>
+          <Search className='w-5 h-5' />
+        </a>
+        <a href='/' aria-label='Menu'>
+          <EllipsisVertical className='w-5 h-5' />
+        </a>
+      </div>
+
+      <div class='hidden lg:flex gap-2 items-center'>
+        <button
+          class='hidden h-8 rounded-md px-3 text-sm lg:inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
+          >Support</button
+        >
+        <button
+          class='hidden bg-primary-hover h-8 rounded-full px-3 text-sm lg:inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border-primary border-1 text-primary'
+          >Dashboard</button
+        >
+        <a href='/' aria-label='ThemeToggle' class='pl-2'>
+          <Moon className='w-4 h-4 stroke-muted' />
+        </a>
+      </div>
+    </div>
+  </nav>
+  <SubHeader />
+</header>

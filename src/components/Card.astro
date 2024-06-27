@@ -1,0 +1,22 @@
+---
+interface Props {
+  header: string
+  content: string
+  withIcon?: boolean
+}
+
+const { header, content, withIcon = false } = Astro.props
+---
+
+<a href='/' class='border rounded-lg hover:border-primary'>
+  <div class='p-4'>
+    {withIcon ? <slot /> : ''}
+    <h2
+      class='scroll-m-20 pt-4 pb-2 text-lg font-semibold tracking-tight first:mt-0'>
+      {header}
+    </h2>
+    <p class='font-light text-sm text-muted'>
+      {content}
+    </p>
+  </div>
+</a>

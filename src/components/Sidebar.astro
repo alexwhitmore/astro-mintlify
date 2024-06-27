@@ -1,0 +1,58 @@
+---
+import { Icon } from '../components/Icon'
+import siteConfig from '../config/site.json'
+const { anchors, navigation } = siteConfig
+const path = Astro.url.pathname
+---
+
+<div
+  class='hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:flex-col mt-36 lg:pl-10 w-64'>
+  <div class='flex grow flex-col gap-y-5 overflow-y-auto pb-4 px-2'>
+    <nav class='flex flex-1 flex-col'>
+      <ul role='list' class='flex flex-1 flex-col gap-y-7'>
+        <li>
+          <ul role='list' class='-mx-2 space-y-1'>
+            {
+              anchors.map((anchor) => (
+                <li>
+                  <a
+                    href={anchor.url}
+                    class='group flex gap-x-3 rounded-md py-1 text-sm font-medium leading-6 items-center text-muted hover:text-foreground'>
+                    <div class='border rounded-md p-1 group-hover:bg-primary/80 group-hover:text-primary'>
+                      <Icon iconName={anchor.icon} className='h-4 w-4' />
+                    </div>
+                    {anchor.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </li>
+        {
+          navigation.map(({ pages, group }) => (
+            <li>
+              <div class='flex flex-col gap-y-2'>
+                <div class='text-sm font-medium'>{group}</div>
+                <ul>
+                  {pages.map((page) => (
+                    <li class='relative'>
+                      <a
+                        href={page.url}
+                        class={
+                          path === `/${page.url}`
+                            ? 'text-primary  bg-primary-hover block -ml-2 pl-2 py-2 pr-2 rounded-md text-sm font-light'
+                            : 'block -ml-2 pl-2 hover:bg-primary-hover py-2 pr-2 rounded-md text-sm font-light hover:text-primary text-muted'
+                        }>
+                        {page.name}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+  </div>
+</div>

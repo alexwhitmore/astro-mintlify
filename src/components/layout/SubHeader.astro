@@ -1,0 +1,25 @@
+---
+import { ChevronRight } from 'lucide-react'
+import site from '../../config/site.json'
+import { getCurrentPageInfo } from '../../lib/utils'
+import { MenuButton } from '../MenuButton'
+
+const currentUrl = Astro.url.pathname.replace(/^\/|\/$/g, '')
+const pageInfo = getCurrentPageInfo(currentUrl, site)
+---
+
+<!-- This is temporary -->
+<div class='flex items-center gap-4 px-4 h-14 border-b lg:px-10'>
+  <MenuButton client:load />
+  {
+    pageInfo ? (
+      <div class='flex items-center gap-1'>
+        <p class='text-muted'>{pageInfo.group}</p>
+        <ChevronRight className='w-3 h-3 text-muted' />
+        <p>{pageInfo.page}</p>
+      </div>
+    ) : (
+      <p class='text-muted'>Home</p>
+    )
+  }
+</div>

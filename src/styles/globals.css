@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 224, 71%, 4%;
+    --background-blur: 224, 71%, 4%, 0.7;
+    --foreground: 220, 9%, 94%;
+    --primary: 191, 100%, 39%;
+    --primary-hover: 193, 100%, 17%, 0.6;
+    --border: 213, 8%, 28%, 0.8;
+    --muted: 216, 7%, 71%;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}

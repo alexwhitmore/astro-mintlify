@@ -1,0 +1,28 @@
+---
+import Sidebar from '../components/Sidebar.astro'
+import Toc from '../components/Toc.astro'
+import Footer from '../components/layout/Footer.astro'
+import Header from '../components/layout/Header.astro'
+import MainLayout from './MainLayout.astro'
+
+interface Props {
+  title: string
+  headers: Array<{ level: number; text: string; id: string }>
+}
+
+const { title, headers } = Astro.props
+---
+
+<MainLayout title={title}>
+  <Header />
+  <div class='grid grid-cols-12 gap-4'>
+    <Sidebar class='col-span-2 hidden xl:block' />
+    <main class='col-span-12 xl:col-span-8 xl:col-start-3 px-4 xl:px-0'>
+      <div class='min-h-screen'>
+        <slot />
+      </div>
+      <Footer />
+    </main>
+    <Toc headers={headers} />
+  </div>
+</MainLayout>
