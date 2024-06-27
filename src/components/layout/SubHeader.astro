@@ -6,10 +6,11 @@ import { MenuButton } from '../MenuButton'
 
 const currentUrl = Astro.url.pathname.replace(/^\/|\/$/g, '')
 const pageInfo = getCurrentPageInfo(currentUrl, site)
+const path = Astro.url.pathname
 ---
 
 <div class='flex items-center gap-4 px-4 h-14 border-b lg:px-10'>
-  <MenuButton client:load />
+  <MenuButton path={path} client:load />
   {
     pageInfo ? (
       <div class='flex items-center gap-1'>

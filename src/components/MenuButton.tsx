@@ -1,16 +1,16 @@
-import { Menu } from 'lucide-react'
+import { Menu, Orbit } from 'lucide-react'
+import { Icon } from '../components/Icon'
+import siteConfig from '../config/site.json'
 import {
   Sheet,
-  SheetClose,
   SheetContent,
-  SheetDescription,
-  SheetFooter,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from './ui/Sheet'
+const { anchors, navigation } = siteConfig
 
-export const MenuButton = () => {
+export const MenuButton = ({ path }: { path: string }) => {
   return (
     <div className='lg:hidden flex'>
       <Sheet>
@@ -21,12 +21,52 @@ export const MenuButton = () => {
         </SheetTrigger>
         <SheetContent side='left'>
           <SheetHeader>
-            <SheetTitle>Edit profile</SheetTitle>
-            <SheetDescription>
-              Make changes to your profile here. Click save when you're done.
-            </SheetDescription>
+            <SheetTitle className='text-left flex gap-2 items-center'>
+              <Orbit className='w-4 h-4' />
+              astro docs
+            </SheetTitle>
           </SheetHeader>
-          <div className='grid gap-4 py-4'>
+          <ul role='list' className='flex flex-1 flex-col gap-y-7 mt-5 pl-2'>
+            <li>
+              <ul role='list' className='-mx-2 space-y-1'>
+                {anchors.map((anchor) => (
+                  <li>
+                    <a
+                      href={anchor.url}
+                      className='group flex gap-x-3 rounded-md py-1 text-sm font-medium leading-6 items-center text-muted hover:text-foreground'>
+                      <div className='border rounded-md p-1 group-hover:bg-primary/80 group-hover:text-primary'>
+                        <Icon iconName={anchor.icon} className='h-4 w-4' />
+                      </div>
+                      {anchor.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </li>
+            {navigation.map(({ pages, group }) => (
+              <li>
+                <div className='flex flex-col gap-y-2'>
+                  <div className='text-sm font-medium'>{group}</div>
+                  <ul className='space-y-1'>
+                    {pages.map((page) => (
+                      <li className='relative'>
+                        <a
+                          href={page.url}
+                          className={
+                            path === `/${page.url}`
+                              ? 'text-primary  bg-primary-hover block -ml-2 pl-2 py-1 pr-2 rounded-md text-sm font-light'
+                              : 'block -ml-2 pl-2 hover:bg-primary-hover py-1 pr-2 rounded-md text-sm font-light hover:text-primary text-muted'
+                          }>
+                          {page.name}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </li>
+            ))}
+          </ul>
+          {/* <div className='grid gap-4 py-4'>
             <div className='grid grid-cols-4 items-center gap-4'>
               <label htmlFor='name' className='text-right'>
                 {' '}
@@ -41,12 +81,12 @@ export const MenuButton = () => {
               </label>
               <input id='username' value='@peduarte' className='col-span-3' />
             </div>
-          </div>
-          <SheetFooter>
+          </div> */}
+          {/* <SheetFooter>
             <SheetClose asChild>
               <button type='submit'>Save changes</button>
             </SheetClose>
-          </SheetFooter>
+          </SheetFooter> */}
         </SheetContent>
       </Sheet>
     </div>
