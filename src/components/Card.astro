@@ -3,12 +3,13 @@ interface Props {
   header: string
   content: string
   withIcon?: boolean
+  href?: string
 }
 
-const { header, content, withIcon = false } = Astro.props
+const { header, content, withIcon = false, href = '#' } = Astro.props
 ---
 
-<a href='/' class='border rounded-lg hover:border-primary'>
+<a href={href} class='border rounded-lg hover:border-primary'>
   <div class='p-4'>
     {withIcon ? <slot /> : ''}
     <h2

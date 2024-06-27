@@ -6,7 +6,7 @@ interface Props {
 const { headers } = Astro.props
 ---
 
-<aside class='hidden xl:block mt-[150px] fixed xl:left-[calc(50%+460px)]'>
+<aside class='fixed top-32 left-[1080px] hidden w-96 shrink-0 xl:block'>
   <p class='text-base font-semibold text-nowrap'>On this page</p>
   {
     headers && headers.length > 0 ? (
@@ -33,7 +33,7 @@ const { headers } = Astro.props
       if (item instanceof HTMLElement) {
         const id = item.dataset.id
         if (id === path) {
-          item.classList.add('border-l', 'border-primary')
+          item.classList.add('border-primary')
         } else {
           item.classList.remove('border-primary')
         }

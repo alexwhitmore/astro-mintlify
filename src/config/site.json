@@ -20,20 +20,20 @@
     {
       "group": "Get Started",
       "pages": [
-        { "name": "Introduction", "url": "introduction" },
-        { "name": "Quickstart", "url": "quickstart" },
-        { "name": "Development", "url": "development" }
+        { "name": "Introduction", "url": "/" },
+        { "name": "Quickstart", "url": "/quickstart" },
+        { "name": "Development", "url": "/development" }
       ]
     },
     {
       "group": "Essentials",
       "pages": [
-        { "name": "Markdown", "url": "essentials/markdown" },
-        { "name": "Code", "url": "essentials/code" },
-        { "name": "Images", "url": "essentials/images" },
-        { "name": "Settings", "url": "essentials/settings" },
-        { "name": "Navigation", "url": "essentials/navigation" },
-        { "name": "Reusable Snippets", "url": "essentials/reusable-snippets" }
+        { "name": "Markdown", "url": "/essentials/markdown" },
+        { "name": "Code", "url": "/essentials/code" },
+        { "name": "Images", "url": "/essentials/images" },
+        { "name": "Settings", "url": "/essentials/settings" },
+        { "name": "Navigation", "url": "/essentials/navigation" },
+        { "name": "Reusable Snippets", "url": "/essentials/reusable-snippets" }
       ]
     }
   ]
