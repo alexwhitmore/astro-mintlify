@@ -37,7 +37,7 @@ const path = Astro.url.pathname
                     <a
                       href={page.url}
                       class={
-                        path === `/${page.url}`
+                        path === `${page.url}`
                           ? 'text-primary bg-primary/30 block -ml-2 pl-2 py-1 pr-2 rounded-md text-sm font-light'
                           : 'block -ml-2 pl-2 hover:bg-primary/30 py-1 pr-2 rounded-md text-sm font-light hover:text-primary text-muted-foreground'
                       }>
