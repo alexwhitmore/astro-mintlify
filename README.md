@@ -10,12 +10,14 @@ Astro Mintlify is an open-source project built with [Astro](https://github.com/w
 ## Running Locally
 
 1. Install dependencies using npm:
-```
+
+```bash
 npm install
 ```
 
-3. Start the development server
-```
+1. Start the development server
+
+```bash
 npm run dev
 ```
 

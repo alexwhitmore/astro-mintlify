@@ -33,7 +33,7 @@ export const MenuButton = ({ path }: { path: string }) => {
                   <li>
                     <a
                       href={anchor.url}
-                      className='group flex gap-x-3 rounded-md py-1 text-sm font-medium leading-6 items-center text-muted hover:text-foreground'>
+                      className='group flex gap-x-3 rounded-md py-1 text-sm font-medium leading-6 items-center text-muted-foreground hover:text-foreground'>
                       <div className='border rounded-md p-1 group-hover:bg-primary/80 group-hover:text-primary'>
                         <Icon iconName={anchor.icon} className='h-4 w-4' />
                       </div>
@@ -54,8 +54,8 @@ export const MenuButton = ({ path }: { path: string }) => {
                           href={page.url}
                           className={
                             path === `/${page.url}`
-                              ? 'text-primary  bg-primary-hover block -ml-2 pl-2 py-1 pr-2 rounded-md text-sm font-light'
-                              : 'block -ml-2 pl-2 hover:bg-primary-hover py-1 pr-2 rounded-md text-sm font-light hover:text-primary text-muted'
+                              ? 'text-primary  bg-primary/30 block -ml-2 pl-2 py-1 pr-2 rounded-md text-sm font-light'
+                              : 'block -ml-2 pl-2 hover:bg-primary/30 py-1 pr-2 rounded-md text-sm font-light hover:text-primary text-muted-foreground'
                           }>
                           {page.name}
                         </a>
@@ -66,27 +66,6 @@ export const MenuButton = ({ path }: { path: string }) => {
               </li>
             ))}
           </ul>
-          {/* <div className='grid gap-4 py-4'>
-            <div className='grid grid-cols-4 items-center gap-4'>
-              <label htmlFor='name' className='text-right'>
-                {' '}
-                Name{' '}
-              </label>
-              <input id='name' value='Pedro Duarte' className='col-span-3' />
-            </div>
-            <div className='grid grid-cols-4 items-center gap-4'>
-              <label htmlFor='username' className='text-right'>
-                {' '}
-                Username{' '}
-              </label>
-              <input id='username' value='@peduarte' className='col-span-3' />
-            </div>
-          </div> */}
-          {/* <SheetFooter>
-            <SheetClose asChild>
-              <button type='submit'>Save changes</button>
-            </SheetClose>
-          </SheetFooter> */}
         </SheetContent>
       </Sheet>
     </div>

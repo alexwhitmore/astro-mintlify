@@ -1,43 +1,28 @@
 ---
-import Sidebar from '../components/Sidebar.astro'
-import Footer from '../components/layout/Footer.astro'
-import Header from '../components/layout/Header.astro'
-import MainLayout from './MainLayout.astro'
-
 interface Props {
-  title: string
   headers: Array<{ level: number; text: string; id: string }>
+  title: string
 }
 
-const { title, headers } = Astro.props
+const { headers, title } = Astro.props
+import Footer from '../components/layout/Footer.astro'
+
+import Sidebar from '../components/Sidebar.astro'
+import Toc from '../components/Toc.astro'
+import Header from '../components/layout/Header.astro'
+import MainLayout from './MainLayout.astro'
 ---
 
 <MainLayout title={title}>
   <Header />
   <div class='grid grid-cols-12 lg:px-4'>
     <Sidebar />
-    <main class='col-span-12 xl:col-span-9 px-4 lg:px-10 -mt-5 xl:pl-72'>
+    <main class='col-span-12 xl:col-span-9 px-4 lg:px-10 mt-32 lg:pl-64'>
       <div class='min-h-screen'>
         <slot />
       </div>
       <Footer />
-      <aside class='fixed top-32 right-0 pl-10 w-96 hidden xl:block'>
-        <p class='text-base font-semibold'>On this page</p>
-        {
-          headers && headers.length > 0 ? (
-            <ul class='mt-2 pl-1'>
-              {headers.map((header) => (
-                <li
-                  class='toc-link border-l pl-2 hover:border-primary py-1'
-                  style={`margin-left: ${(header.level - 2) * 12}px;`}
-                  data-id={header.id}>
-                  <a href={`#${header.id}`}>{header.text}</a>
-                </li>
-              ))}
-            </ul>
-          ) : null
-        }
-      </aside>
     </main>
+    <Toc headers={headers} />
   </div>
 </MainLayout>

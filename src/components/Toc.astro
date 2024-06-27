@@ -4,10 +4,14 @@ interface Props {
 }
 
 const { headers } = Astro.props
+import { AlignLeft } from 'lucide-react'
 ---
 
-<aside class='fixed top-32 left-[1080px] hidden w-96 shrink-0 xl:block'>
-  <p class='text-base font-semibold text-nowrap'>On this page</p>
+<aside class='fixed top-32 right-0 pl-10 w-96 hidden xl:block'>
+  <p class='text-base font-semibold flex gap-2 items-center'>
+    <AlignLeft className='w-4 h-4' />
+    On this page
+  </p>
   {
     headers && headers.length > 0 ? (
       <ul class='mt-2 pl-1'>

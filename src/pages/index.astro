@@ -3,10 +3,6 @@ interface Props {
   headers: Array<{ level: number; text: string; id: string }>
 }
 
-import MainLayout from '../layouts/MainLayout.astro'
-import Header from '../components/layout/Header.astro'
-import Sidebar from '../components/Sidebar.astro'
-import Footer from '../components/layout/Footer.astro'
 import Card from '../components/Card.astro'
 import { Image } from 'astro:assets'
 import HeroImage from '../../public/hero-light.svg'
@@ -27,116 +23,93 @@ const content = `
   <h2 id="setting-up" class='scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl'>Setting up</h2>
   <h2 id="make-it-yours" class='scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl'>Make it yours</h2>
 `
+import DocumentLayout from '../layouts/DocumentationLayout.astro'
 const headers = extractHeaders(content)
 ---
 
-<MainLayout title={'test'}>
-  <Header />
-  <div class='grid grid-cols-12 lg:px-4'>
-    <Sidebar />
-    <main class='col-span-12 xl:col-span-9 px-4 lg:px-10 mt-[105px] lg:pl-64'>
-      <div class='min-h-screen'>
-        <section>
-          <div class='my-8 w-full'>
-            <Image
-              src={HeroImage}
-              alt='Astro Hero Image'
-              width='768'
-              fetchpriority='high'
-              loading='lazy'
-            />
-          </div>
-          <h2
-            id='setting-up'
-            class='scroll-mt-28 text-3xl font-extrabold tracking-tight lg:text-4xl'>
-            Setting up
-          </h2>
-          <p class='text-md font-light my-5'>
-            The first step to world-class documentation is setting up your
-            editing environments.
-          </p>
-          <div class='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5'>
-            <Card
-              header='Edit Your Docs'
-              content='Get your docs set up locally for easy development'
-              withIcon>
-              <SquarePen className='stroke-primary' />
-            </Card>
-            <Card
-              header='Preview Changes'
-              content="Preview your changes before you push to make sure they're perfect"
-              withIcon>
-              <ImageIcon className='stroke-primary' />
-            </Card>
-          </div>
-        </section>
-        <section class='my-10'>
-          <h2
-            id='make-it-yours'
-            class='scroll-m-28 text-3xl font-extrabold tracking-tight lg:text-4xl'>
-            Make it yours
-          </h2>
-          <p class='text-md font-light my-5'>
-            Update your docs to your brand and add valuable content for the best
-            user conversion.
-          </p>
-        </section>
-        <section>
-          <div class='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5'>
-            <Card
-              header='Customize Style'
-              content="Customize your docs to your company's colors and brands"
-              withIcon>
-              <SwatchBook className='stroke-primary' />
-            </Card>
-            <Card
-              header='Reference APIs'
-              content='Automatically generate endpoints from an OpenAPI spec'
-              withIcon>
-              <Code className='stroke-primary' />
-            </Card>
-            <Card
-              header='Add Components'
-              content='Build interactive features and designs to guide your users'
-              withIcon>
-              <Wrench className='stroke-primary' />
-            </Card>
-            <Card
-              header='Get Inspiration'
-              content='Check out our showcase of our favorite documentation'
-              withIcon>
-              <Sparkles className='stroke-primary' />
-            </Card>
-          </div>
-        </section>
-        <section class='my-10 flex justify-end'>
-          <a href='#' class='inline-flex items-center text-sm hover:underline'>
-            Quickstart
-            <ChevronRight className='w-3 h-3 ml-2' />
-          </a>
-        </section>
+<DocumentLayout title='Astro Docs | Introduction' headers={headers}>
+  <div class='min-h-screen'>
+    <section>
+      <div class='mb-8 w-full'>
+        <Image
+          src={HeroImage}
+          alt='Astro Hero Image'
+          width='768'
+          fetchpriority='high'
+          loading='lazy'
+        />
       </div>
-      <Footer />
-    </main>
-    <aside class='fixed top-32 right-0 pl-10 w-96 hidden xl:block'>
-      <p class='text-base font-semibold'>On this page</p>
-      {
-        headers && headers.length > 0 ? (
-          <ul class='mt-2 pl-1'>
-            {headers.map((header) => (
-              <li
-                class='toc-link border-l pl-2 hover:border-primary py-1'
-                style={`margin-left: ${(header.level - 2) * 12}px;`}
-                data-id={header.id}>
-                <a href={`#${header.id}`}>{header.text}</a>
-              </li>
-            ))}
-          </ul>
-        ) : null
-      }
-    </aside>
+      <h2
+        id='setting-up'
+        class='scroll-mt-28 text-3xl font-extrabold tracking-tight lg:text-4xl'>
+        Setting up
+      </h2>
+      <p class='text-md font-light my-5'>
+        The first step to world-class documentation is setting up your editing
+        environments.
+      </p>
+      <div class='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5'>
+        <Card
+          header='Edit Your Docs'
+          content='Get your docs set up locally for easy development'
+          withIcon>
+          <SquarePen className='stroke-primary' />
+        </Card>
+        <Card
+          header='Preview Changes'
+          content="Preview your changes before you push to make sure they're perfect"
+          withIcon>
+          <ImageIcon className='stroke-primary' />
+        </Card>
+      </div>
+    </section>
+    <section class='my-10'>
+      <h2
+        id='make-it-yours'
+        class='scroll-m-28 text-3xl font-extrabold tracking-tight lg:text-4xl'>
+        Make it yours
+      </h2>
+      <p class='text-md font-light my-5'>
+        Update your docs to your brand and add valuable content for the best
+        user conversion.
+      </p>
+    </section>
+    <section>
+      <div class='grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5'>
+        <Card
+          header='Customize Style'
+          content="Customize your docs to your company's colors and brands"
+          withIcon>
+          <SwatchBook className='stroke-primary' />
+        </Card>
+        <Card
+          header='Reference APIs'
+          content='Automatically generate endpoints from an OpenAPI spec'
+          withIcon>
+          <Code className='stroke-primary' />
+        </Card>
+        <Card
+          header='Add Components'
+          content='Build interactive features and designs to guide your users'
+          withIcon>
+          <Wrench className='stroke-primary' />
+        </Card>
+        <Card
+          header='Get Inspiration'
+          content='Check out our showcase of our favorite documentation'
+          withIcon>
+          <Sparkles className='stroke-primary' />
+        </Card>
+      </div>
+    </section>
+    <section class='my-10 flex justify-end'>
+      <a href='#' class='inline-flex items-center text-sm hover:underline'>
+        Quickstart
+        <ChevronRight className='w-3 h-3 ml-2' />
+      </a>
+    </section>
   </div>
-</MainLayout>
+</DocumentLayout>
 
 <script>
   function updateActiveLink() {

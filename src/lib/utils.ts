@@ -42,3 +42,7 @@ export function getCurrentPageInfo(
   }
   return null
 }
+
+export function rootInDarkMode() {
+  return document.documentElement.getAttribute('data-theme') === 'dark'
+}
