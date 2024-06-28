@@ -3,7 +3,7 @@
 > [!Warning]
 > This is a very early stage work in progress. More updates soon!
 
-<img width="1568" alt="mint" src="https://github.com/alexwhitmore/astro-mintlify/assets/57722812/f42fd755-5df0-49c5-b15e-0d24d5ea6987">
+![astro-dual](https://github.com/alexwhitmore/astro-mintlify/assets/57722812/cac7f86f-1490-4736-bb38-9fbe9abe7f93)
 
 Astro Mintlify is an open-source project built with [Astro](https://github.com/withastro/astro) and is based on the [Mintlify Starter](https://github.com/mintlify/starter).
 
