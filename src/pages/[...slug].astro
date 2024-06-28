@@ -26,7 +26,8 @@ if (doc.length === 0) {
 
 const { Content, headings } = await doc[0].render()
 const toc = generateToc(headings)
-const title = page?.name
+// TODO: Remove the hardcoded version and instead use the version from the page
+const title = 'Documentation'
 ---
 
 <DocumentationLayout title={title} toc={toc}>
