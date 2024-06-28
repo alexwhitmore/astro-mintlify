@@ -10,7 +10,7 @@ const path = Astro.url.pathname
 ---
 
 <div class='flex items-center gap-4 px-4 h-14 border-b lg:px-10'>
-  <MenuButton path={path} client:load />
+  <MenuButton path={path || '/'} client:load />
   {
     pageInfo ? (
       <div class='flex items-center gap-1'>

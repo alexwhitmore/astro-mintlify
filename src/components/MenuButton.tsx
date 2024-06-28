@@ -30,11 +30,11 @@ export const MenuButton = ({ path }: { path: string }) => {
             <li>
               <ul role='list' className='-mx-2 space-y-1'>
                 {anchors.map((anchor) => (
-                  <li>
+                  <li key={anchor.url}>
                     <a
                       href={anchor.url}
                       className='group flex gap-x-3 rounded-md py-1 text-sm font-medium leading-6 items-center text-muted-foreground hover:text-foreground'>
-                      <div className='border rounded-md p-1 group-hover:bg-primary/80 group-hover:text-primary'>
+                      <div className='border rounded-md p-1 group-hover:bg-primary/30 group-hover:text-primary'>
                         <Icon iconName={anchor.icon} className='h-4 w-4' />
                       </div>
                       {anchor.name}
@@ -44,12 +44,12 @@ export const MenuButton = ({ path }: { path: string }) => {
               </ul>
             </li>
             {navigation.map(({ pages, group }) => (
-              <li>
+              <li key={group}>
                 <div className='flex flex-col gap-y-2'>
                   <div className='text-sm font-medium'>{group}</div>
                   <ul className='space-y-1'>
                     {pages.map((page) => (
-                      <li className='relative'>
+                      <li key={page.url} className='relative'>
                         <a
                           href={page.url}
                           className={

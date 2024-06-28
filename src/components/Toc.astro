@@ -1,53 +1,33 @@
 ---
-interface Props {
-  headers: Array<{ level: number; text: string; id: string }>
-}
-
-const { headers } = Astro.props
 import { AlignLeft } from 'lucide-react'
+import type { TocItem } from '../lib/toc'
+import TOCHeading from './TOCHeading.astro'
+
+interface Props {
+  toc: TocItem[]
+}
+const { toc } = Astro.props
 ---
 
-<aside class='fixed top-32 right-0 pl-10 w-96 hidden xl:block'>
-  <p class='text-base font-semibold flex gap-2 items-center'>
-    <AlignLeft className='w-4 h-4' />
+<aside class='toc-container'>
+  <h3 class='toc-title'>
+    <AlignLeft className='w-4 h-4 inline-block mr-2' />
     On this page
-  </p>
-  {
-    headers && headers.length > 0 ? (
-      <ul class='mt-2 pl-1'>
-        {headers.map((header) => (
-          <li
-            class='toc-link border-l pl-2 hover:border-primary py-1'
-            style={`margin-left: ${(header.level - 2) * 12}px;`}
-            data-id={header.id}>
-            <a href={`#${header.id}`}>{header.text}</a>
-          </li>
-        ))}
-      </ul>
-    ) : null
-  }
+  </h3>
+  <ul class='toc-list'>
+    {toc.map((heading) => <TOCHeading heading={heading} />)}
+  </ul>
 </aside>
 
-<script>
-  function updateActiveLink() {
-    const path = window.location.hash.slice(1)
-    const listItems = document.querySelectorAll('.toc-link')
-
-    listItems.forEach((item) => {
-      if (item instanceof HTMLElement) {
-        const id = item.dataset.id
-        if (id === path) {
-          item.classList.add('border-primary')
-        } else {
-          item.classList.remove('border-primary')
-        }
-      }
-    })
+<!-- TODO: Move this to global stylesheet -->
+<style>
+  .toc-container {
+    @apply fixed top-32 right-0 pl-10 w-96 hidden xl:block;
   }
-
-  updateActiveLink()
-  window.addEventListener('hashchange', updateActiveLink)
-  window.addEventListener('scroll', () => {
-    requestAnimationFrame(updateActiveLink)
-  })
-</script>
+  .toc-title {
+    @apply text-base font-semibold flex items-center hover:text-primary;
+  }
+  .toc-list {
+    @apply mt-2 pl-1 text-sm space-y-1;
+  }
+</style>

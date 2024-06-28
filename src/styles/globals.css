@@ -56,3 +56,21 @@
 body {
   @apply bg-background text-foreground;
 }
+
+/* TODO: Most likely will rmove all MD/MDX styles into a separate css file */
+h1 {
+  @apply scroll-m-20 text-3xl font-extrabold tracking-tight lg:text-4xl;
+}
+
+h2 {
+  @apply scroll-mt-28 text-3xl font-extrabold tracking-tight lg:text-4xl my-2;
+}
+
+h3 {
+  @apply scroll-mt-28 text-xl font-extrabold tracking-tight lg:text-2xl;
+}
+
+h1 ~ p,
+h2 ~ p {
+  @apply pt-2 pb-5;
+}

@@ -1,0 +1,79 @@
+---
+title: 'Quickstart'
+date: '2024-06-28'
+description: 'The documentation for getting started quickly with this template.'
+draft: false
+---
+
+import {
+  Brush,
+  Code,
+  LineChart,
+  PanelTop,
+  ChevronLeft,
+  ChevronRight,
+} from 'lucide-react'
+
+import Card from '../../components/Card.astro'
+import CardGrid from '../../components/docs/CardGrid.astro'
+import GroupName from '../../components/docs/GroupName.astro'
+
+<GroupName>Getting Started</GroupName>
+
+## Quickstart
+
+Start building awesome documentation in under 5 minutes
+
+## Setup your development
+
+Learn how to update your docs locally and and deploy them to the public.
+
+### Edit and preview
+
+Accordion Placeholder
+
+### Edit and preview
+
+Accordion Placeholder
+
+## Update your docs
+
+Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+
+<CardGrid>
+  <Card
+    header='Customize Style'
+    content="Customize your docs to your company's colors and brands"
+    withIcon>
+    <Brush className='stroke-primary' />
+  </Card>
+  <Card
+    header='Reference APIs'
+    content='Automatically generate endpoints from an OpenAPI spec'
+    withIcon>
+    <Code className='stroke-primary' />
+  </Card>
+  <Card
+    header='Add Components'
+    content='Build interactive features and designs to guide your users'
+    withIcon>
+    <LineChart className='stroke-primary' />
+  </Card>
+  <Card
+    header='Get Inspiration'
+    content='Check out our showcase of our favorite documentation'
+    withIcon>
+    <PanelTop className='stroke-primary' />
+  </Card>
+</CardGrid>
+
+<section class='my-10 flex justify-between'>
+  <a href='#' class='inline-flex items-center text-sm hover:underline gap-2'>
+    <ChevronLeft className='w-3 h-3' />
+    Introduction
+  </a>
+  <a href='#' class='inline-flex items-center text-sm hover:underline gap-2'>
+    Development
+    <ChevronRight className='w-3 h-3' />
+  </a>
+</section>

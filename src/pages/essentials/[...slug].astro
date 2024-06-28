@@ -1,0 +1,31 @@
+---
+import { getCollection } from 'astro:content'
+import siteConfig from '../../config/site.json'
+import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
+
+export async function getStaticPaths() {
+  const docs = await getCollection('docs')
+  const paths = siteConfig.navigation.flatMap((group) =>
+    group.pages.map((page) => ({
+      params: { slug: page.url.slice(1) },
+      props: { page },
+    }))
+  )
+
+  return paths
+}
+
+const { slug } = Astro.params
+
+const doc = await getCollection('essentials', (entry) => entry.slug === slug)
+
+if (doc.length === 0) {
+  return Astro.redirect('/404')
+}
+
+const { Content } = await doc[0].render()
+---
+
+<DocumentationLayout title='{page.title}' headers={[]}>
+  <Content />
+</DocumentationLayout>

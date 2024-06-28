@@ -32,19 +32,25 @@ const path = Astro.url.pathname
             <div class='flex flex-col gap-y-2'>
               <div class='text-sm font-medium'>{group}</div>
               <ul class='space-y-1'>
-                {pages.map((page) => (
-                  <li class='relative'>
-                    <a
-                      href={page.url}
-                      class={
-                        path === `${page.url}`
-                          ? 'text-primary bg-primary/30 block -ml-2 pl-2 py-1 pr-2 rounded-md text-sm font-light'
-                          : 'block -ml-2 pl-2 hover:bg-primary/30 py-1 pr-2 rounded-md text-sm font-light hover:text-primary text-muted-foreground'
-                      }>
-                      {page.name}
-                    </a>
-                  </li>
-                ))}
+                {pages.map((page) => {
+                  const isDisabled = page.url.startsWith('/essentials')
+                  return (
+                    <li class='relative'>
+                      <a
+                        href={isDisabled ? '#' : page.url}
+                        class={
+                          isDisabled
+                            ? 'text-muted-foreground cursor-not-allowed block -ml-2 pl-2 py-1 pr-2 rounded-md text-sm font-light'
+                            : path === `${page.url}`
+                              ? 'text-primary bg-primary/30 block -ml-2 pl-2 py-1 pr-2 rounded-md text-sm font-light'
+                              : 'block -ml-2 pl-2 hover:bg-primary/30 py-1 pr-2 rounded-md text-sm font-light hover:text-primary text-muted-foreground'
+                        }
+                        {...(isDisabled ? { 'aria-disabled': 'true' } : {})}>
+                        {page.name}
+                      </a>
+                    </li>
+                  )
+                })}
               </ul>
             </div>
           </li>

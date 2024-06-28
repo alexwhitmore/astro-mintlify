@@ -1,0 +1,29 @@
+import type { MarkdownHeading } from 'astro'
+
+export interface TocItem extends MarkdownHeading {
+  children: TocItem[]
+}
+
+export function generateToc(
+  headings: MarkdownHeading[],
+  maxDepth = 3
+): TocItem[] {
+  const toc: TocItem[] = []
+  const parentHeadings = new Map<number, TocItem>()
+
+  headings.forEach((h) => {
+    const heading = { ...h, children: [] }
+    parentHeadings.set(heading.depth, heading)
+
+    if (heading.depth === 2) {
+      toc.push(heading)
+    } else if (heading.depth <= maxDepth) {
+      const parent = parentHeadings.get(heading.depth - 1)
+      if (parent) {
+        parent.children.push(heading)
+      }
+    }
+  })
+
+  return toc
+}
