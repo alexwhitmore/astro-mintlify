@@ -26,7 +26,7 @@ if (doc.length === 0) {
 
 const { Content, headings } = await doc[0].render()
 const toc = generateToc(headings)
-const title = page?.name || doc[0].data.title || 'Documentation'
+const title = page?.name
 ---
 
 <DocumentationLayout title={title} toc={toc}>
