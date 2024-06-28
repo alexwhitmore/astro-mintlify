@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content'
 import siteConfig from '../../config/site.json'
 import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
+import { generateToc } from '../../lib/toc'
 
 export async function getStaticPaths() {
   const docs = await getCollection('docs')
@@ -16,6 +17,7 @@ export async function getStaticPaths() {
 }
 
 const { slug } = Astro.params
+const { page } = Astro.props
 
 const doc = await getCollection('essentials', (entry) => entry.slug === slug)
 
@@ -23,9 +25,11 @@ if (doc.length === 0) {
   return Astro.redirect('/404')
 }
 
-const { Content } = await doc[0].render()
+const { Content, headings } = await doc[0].render()
+const toc = generateToc(headings)
+const title = 'Essentials'
 ---
 
-<DocumentationLayout title='{page.title}' headers={[]}>
+<DocumentationLayout title={title} toc={toc}>
   <Content />
 </DocumentationLayout>
