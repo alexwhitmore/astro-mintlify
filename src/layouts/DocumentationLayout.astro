@@ -5,16 +5,14 @@ import Footer from '../components/layout/Footer.astro'
 import Header from '../components/layout/Header.astro'
 import type { TocItem } from '../lib/toc'
 import MainLayout from './MainLayout.astro'
+
 interface Props {
   toc: TocItem[]
   title: string
 }
 const { toc, title } = Astro.props
-import { generateToc } from '../lib/toc'
-const tocItems = generateToc(toc)
 ---
 
-<script src='../scripts/toc.js'></script>
 <MainLayout title={title}>
   <Header />
   <div class='grid grid-cols-12 lg:px-4'>
@@ -25,6 +23,8 @@ const tocItems = generateToc(toc)
       </div>
       <Footer />
     </main>
-    <Toc toc={tocItems} />
+    <Toc toc={toc} />
   </div>
 </MainLayout>
+
+<script src='../scripts/toc.js'></script>
