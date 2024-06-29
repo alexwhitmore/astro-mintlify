@@ -51,12 +51,12 @@ import SubHeader from './SubHeader.astro'
           >Support</button
         >
         <button
-          class='hidden bg-primary/30 h-8 rounded-full px-3 text-sm lg:inline-flex items-center justify-center border whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border-primary border-1 text-primary gap-2'>
+          class='hidden bg-primary dark:bg-primary/10 h-8 rounded-full px-3 text-sm lg:inline-flex items-center justify-center border whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border-primary text-primary-foreground dark:text-primary gap-2 mr-2'>
           Dashboard
           <ChevronRight className='w-3 h-3' />
         </button>
-        <ThemeToggle />
       </div>
+      <ThemeToggle />
     </div>
   </nav>
   <SubHeader />

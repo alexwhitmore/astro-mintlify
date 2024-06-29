@@ -8,6 +8,7 @@ draft: false
 import Card from '../../components/Card.astro'
 import CardGrid from '../../components/docs/CardGrid.astro'
 import GroupName from '../../components/docs/GroupName.astro'
+import Callout from '../../components/docs/Callout'
 
 <GroupName>Getting Started</GroupName>
 
@@ -15,6 +16,10 @@ import GroupName from '../../components/docs/GroupName.astro'
 
 Learn how to preview changes locally
 
-Alert/Callout Placeholder
+<Callout
+  alertTitle='Heads up!'
+  alertDescription='You can add components to your app using the cli.'
+  variant='warning'
+/>
 
 Step 1. Install Mintlify on your OS:
