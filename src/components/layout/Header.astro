@@ -41,6 +41,7 @@ import SubHeader from './SubHeader.astro'
       </div>
 
       <div class='flex gap-2 lg:hidden'>
+        <ThemeToggle />
         <SearchDialog client:load aria-label='Search menu' />
         <SettingsDropdown client:load aria-label='Settings menu' />
       </div>
@@ -56,7 +57,6 @@ import SubHeader from './SubHeader.astro'
           <ChevronRight className='w-3 h-3' />
         </button>
       </div>
-      <ThemeToggle />
     </div>
   </nav>
   <SubHeader />
