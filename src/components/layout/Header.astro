@@ -40,12 +40,6 @@ import SubHeader from './SubHeader.astro'
         </div>
       </div>
 
-      <div class='flex gap-2 lg:hidden'>
-        <ThemeToggle />
-        <SearchDialog client:load aria-label='Search menu' />
-        <SettingsDropdown client:load aria-label='Settings menu' />
-      </div>
-
       <div class='hidden lg:flex gap-2 items-center'>
         <button
           class='hidden h-8 rounded-md px-3 text-sm lg:inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
@@ -56,6 +50,14 @@ import SubHeader from './SubHeader.astro'
           Dashboard
           <ChevronRight className='w-3 h-3' />
         </button>
+      </div>
+
+      <div class='flex'>
+        <div class='flex lg:hidden gap-2'>
+          <SearchDialog client:load aria-label='Search menu' />
+          <SettingsDropdown client:load aria-label='Settings menu' />
+        </div>
+        <ThemeToggle />
       </div>
     </div>
   </nav>
