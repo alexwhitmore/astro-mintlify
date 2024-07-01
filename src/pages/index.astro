@@ -4,7 +4,7 @@ import { getEntry } from 'astro:content'
 import DocumentationLayout from '../layouts/DocumentationLayout.astro'
 import { generateToc } from '../lib/toc'
 
-const entry = await getEntry('docs', 'index')
+const entry = await getEntry('getting-started', 'index')
 const { Content, headings } = await entry.render()
 const tocItems = generateToc(headings)
 ---

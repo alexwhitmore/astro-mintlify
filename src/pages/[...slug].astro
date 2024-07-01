@@ -18,7 +18,10 @@ export async function getStaticPaths() {
 
 const { slug } = Astro.params
 const { page } = Astro.props
-const doc = await getCollection('docs', (entry) => entry.slug === slug)
+const doc = await getCollection(
+  'getting-started',
+  (entry) => entry.slug === slug
+)
 
 if (doc.length === 0) {
   return Astro.redirect('/404')
