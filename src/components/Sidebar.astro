@@ -1,7 +1,14 @@
 ---
 import { Icon } from '../components/Icon'
-const { anchors, navigation } = Astro.props
+import type { Anchor, NavigationItem } from '../types'
 const path = Astro.url.pathname
+
+interface Props {
+  anchors: Anchor[]
+  navigation: NavigationItem[]
+}
+
+const { anchors, navigation } = Astro.props
 ---
 
 <aside class='fixed top-32 hidden shrink-0 lg:block w-56 pl-8'>
@@ -10,7 +17,7 @@ const path = Astro.url.pathname
       <li>
         <ul role='list' class='-mx-2 space-y-1'>
           {
-            anchors.map((anchor: any) => (
+            anchors.map((anchor) => (
               <li>
                 <a
                   href={anchor.url}
@@ -26,12 +33,12 @@ const path = Astro.url.pathname
         </ul>
       </li>
       {
-        navigation.map(({ pages, group }: any) => (
+        navigation.map(({ pages, group }) => (
           <li>
             <div class='flex flex-col gap-y-2'>
               <div class='text-sm font-medium'>{group}</div>
               <ul class='space-y-1'>
-                {pages.map((page: any) => (
+                {pages.map((page) => (
                   <li class='relative'>
                     <a
                       href={page.url}
