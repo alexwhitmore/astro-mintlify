@@ -48,6 +48,14 @@ const config = {
           DEFAULT: 'hsl(var(--callout))',
           foreground: 'hsl(var(--callout-foreground))',
         },
+        note: {
+          DEFAULT: 'hsl(var(--note))',
+          foreground: 'hsl(var(--note-foreground))',
+        },
+        info: {
+          DEFAULT: 'hsl(var(--info))',
+          foreground: 'hsl(var(--info-foreground))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',

@@ -10,8 +10,8 @@ const alertVariants = cva(
       variant: {
         warning:
           'bg-warning/10 border border-warning-foreground/50 text-warning-foreground font-light [&>svg]:text-warning-foreground font-extralight',
-        info: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
-        note: 'bg-[#0B3B2C]/50 border border-[#29A383]/30 text-[#29A383] font-light [&>svg]:text-warning-foreground font-extralight',
+        info: 'bg-secondary/50 border border-secondary-foreground/10 text-foreground font-light [&>svg]:text-foreground font-extralight',
+        note: 'bg-note/10 border border-note-foreground/50 text-note-foreground font-light [&>svg]:text-note-foreground font-extralight',
         callout:
           'bg-callout/30 border border-callout-foreground/30 text-callout-foreground font-light [&>svg]:text-callout-foreground font-extralight',
       },

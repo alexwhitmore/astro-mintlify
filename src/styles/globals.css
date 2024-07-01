@@ -30,6 +30,12 @@
     --callout: 120 61% 85%;
     --callout-foreground: 152 41% 13%;
 
+    --note: 193 98% 74%;
+    --note-foreground: 205 64% 29%;
+
+    --info: 205 100% 88%;
+    --info-foreground: 216 7% 71%;
+
     --radius: 0.5rem;
   }
 
@@ -59,6 +65,12 @@
 
     --callout: 152 41% 13%;
     --callout-foreground: 131 50% 63%;
+
+    --note: 207 100% 23%;
+    --note-foreground: 210 100% 72%;
+
+    --info: 193 100% 14%;
+    --info-foreground: 205 100% 88%;
   }
 }
 

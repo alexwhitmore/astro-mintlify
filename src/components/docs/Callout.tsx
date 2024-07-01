@@ -1,5 +1,6 @@
 import {
   Lightbulb as Callout,
+  CircleAlert,
   Info,
   TriangleAlert as Warning,
 } from 'lucide-react'
@@ -15,7 +16,7 @@ const iconMapping = {
   callout: <Callout className='h-4 w-4' />,
   warning: <Warning className='h-4 w-4' />,
   info: <Info className='h-4 w-4' />,
-  note: <Info className='h-4 w-4' />,
+  note: <CircleAlert className='h-4 w-4' />,
 }
 
 const AlertComponent = ({ alertTitle, alertDescription, variant }: Props) => {
