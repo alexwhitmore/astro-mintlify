@@ -3,19 +3,17 @@ import * as React from 'react'
 
 import { cn } from '../../lib/utils'
 
-// dark: dark:bg-warning/30 dark:border-warning-foreground/80
-
 const alertVariants = cva(
-  'relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-3 [&>svg]:text-foreground [&>svg~*]:pl-7',
+  'relative w-full rounded-lg border px-4 py-3 text-sm [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground [&>svg~*]:pl-7',
   {
     variants: {
       variant: {
         warning:
-          'bg-warning border border-warning-foreground/20 text-warning-foreground font-light [&>svg]:text-warning-foreground dark:bg-warning/20 dark:border-warning-foreground/30 font-extralight',
+          'bg-warning/10 border border-warning-foreground/50 text-warning-foreground font-light [&>svg]:text-warning-foreground font-extralight',
         info: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
-        note: 'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
+        note: 'bg-[#0B3B2C]/50 border border-[#29A383]/30 text-[#29A383] font-light [&>svg]:text-warning-foreground font-extralight',
         callout:
-          'border-destructive/50 text-destructive dark:border-destructive [&>svg]:text-destructive',
+          'bg-callout/30 border border-callout-foreground/30 text-callout-foreground font-light [&>svg]:text-callout-foreground font-extralight',
       },
     },
   }

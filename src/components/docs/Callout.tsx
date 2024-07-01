@@ -22,10 +22,14 @@ const AlertComponent = ({ alertTitle, alertDescription, variant }: Props) => {
   const IconComponent = iconMapping[variant]
 
   return (
-    <Alert variant={variant}>
+    <Alert
+      variant={variant}
+      className={`flex ${!alertTitle ? 'items-center' : ''}`}>
       {IconComponent}
-      <AlertTitle>{alertTitle}</AlertTitle>
-      <AlertDescription>{alertDescription}</AlertDescription>
+      <div>
+        <AlertTitle className='mt-1'>{alertTitle}</AlertTitle>
+        <AlertDescription>{alertDescription}</AlertDescription>
+      </div>
     </Alert>
   )
 }

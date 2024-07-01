@@ -44,6 +44,10 @@ const config = {
           DEFAULT: 'hsl(var(--warning))',
           foreground: 'hsl(var(--warning-foreground))',
         },
+        callout: {
+          DEFAULT: 'hsl(var(--callout))',
+          foreground: 'hsl(var(--callout-foreground))',
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
