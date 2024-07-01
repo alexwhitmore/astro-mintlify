@@ -1,9 +1,9 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content'
-import type { CollectionTypes } from '../../config/site'
-import siteConfig from '../../config/site.js'
+import { getCollection } from 'astro:content'
+import siteConfig from '../../config/site'
 import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
-import { getCollections, isValidCollection } from '../../lib/collections'
+import { getCollections, isValidCollectionType } from '../../lib/collections'
+import { type AnyCollectionEntry } from '../../types'
 
 export async function getStaticPaths() {
   return getCollections().map((type) => ({
@@ -12,9 +12,9 @@ export async function getStaticPaths() {
 }
 
 const { type } = Astro.params as { type: string }
-let pages: CollectionEntry<CollectionTypes>[] = []
+let pages: AnyCollectionEntry[] = []
 
-if (isValidCollection(type)) {
+if (isValidCollectionType(type)) {
   pages = await getCollection(type)
 } else {
   throw new Error(`Invalid collection type: ${type}`)
@@ -30,9 +30,10 @@ if (!groupInfo) {
   <h1>{groupInfo.group}</h1>
   <ul>
     {
-      groupInfo.pages.map((page) => (
+      pages.map((page) => (
         <li>
-          <a href={page.url}>{page.name}</a>
+          <a href={`/${type}/${page.slug}`}>{page.data.title}</a>
+          {page.data.description && <p>{page.data.description}</p>}
         </li>
       ))
     }

@@ -1,21 +1,4 @@
-export const COLLECTION_TYPES = ['getting-started', 'essentials'] as const
-export type CollectionTypes = (typeof COLLECTION_TYPES)[number]
-
-export interface SiteConfig {
-  anchors: Array<{
-    name: string
-    icon: string
-    url: string
-  }>
-  navigation: Array<{
-    group: string
-    type: CollectionTypes
-    pages: Array<{
-      name: string
-      url: string
-    }>
-  }>
-}
+import type { SiteConfig } from '../types'
 
 const siteConfig: SiteConfig = {
   anchors: [
@@ -59,5 +42,7 @@ const siteConfig: SiteConfig = {
     },
   ],
 }
+
+export const COLLECTION_TYPES = siteConfig.navigation.map((nav) => nav.type)
 
 export default siteConfig
