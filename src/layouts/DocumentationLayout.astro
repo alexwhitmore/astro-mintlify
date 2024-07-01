@@ -5,12 +5,7 @@ import Footer from '../components/layout/Footer.astro'
 import Header from '../components/layout/Header.astro'
 import type { TocItem } from '../lib/toc'
 import MainLayout from './MainLayout.astro'
-
-import fs from 'fs'
-import path from 'path'
-
-const siteConfigPath = path.resolve('./src/config/site.json')
-const siteConfig = JSON.parse(fs.readFileSync(siteConfigPath, 'utf-8'))
+import siteConfig from '../config/site'
 
 interface Props {
   toc: TocItem[]

@@ -1,29 +1,38 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content'
+import type { CollectionTypes } from '../../config/site'
+import siteConfig from '../../config/site.js'
 import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
+import { getCollections, isValidCollection } from '../../lib/collections'
 
 export async function getStaticPaths() {
-  const collections = ['getting-started', 'essentials', 'guides'] as const
-  return collections.map((collection) => ({
-    params: { type: collection },
+  return getCollections().map((type) => ({
+    params: { type },
   }))
 }
 
-const { type } = Astro.params
-let pages: CollectionEntry<'getting-started' | 'essentials' | 'guides'>[] = []
+const { type } = Astro.params as { type: string }
+let pages: CollectionEntry<CollectionTypes>[] = []
 
-if (type === 'getting-started' || type === 'essentials' || type === 'guides') {
+if (isValidCollection(type)) {
   pages = await getCollection(type)
+} else {
+  throw new Error(`Invalid collection type: ${type}`)
+}
+
+const groupInfo = siteConfig.navigation.find((nav) => nav.type === type)
+if (!groupInfo) {
+  throw new Error(`No group info found for type: ${type}`)
 }
 ---
 
-<DocumentationLayout title={`${type} Documentation`} toc={[]}>
-  <h1>{type} Documentation</h1>
+<DocumentationLayout title={groupInfo.group} toc={[]}>
+  <h1>{groupInfo.group}</h1>
   <ul>
     {
-      pages.map((page) => (
+      groupInfo.pages.map((page) => (
         <li>
-          <a href={`/${type}/${page.slug}`}>{page.data.title}</a>
+          <a href={page.url}>{page.name}</a>
         </li>
       ))
     }

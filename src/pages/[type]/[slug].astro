@@ -1,15 +1,17 @@
 ---
 import { getCollection, type CollectionEntry } from 'astro:content'
+import type { CollectionTypes } from '../../config/site'
 import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
+import { getCollections } from '../../lib/collections'
 
 export async function getStaticPaths() {
-  const collections = ['getting-started', 'essentials', 'guides'] as const
+  const collections = getCollections()
   const allPages = await Promise.all(
     collections.map(async (collection) => {
       const pages = await getCollection(collection)
       return pages.map((page) => ({
         params: { type: collection, slug: page.slug },
-        props: { page },
+        props: { page, type: collection },
       }))
     })
   )
@@ -17,10 +19,11 @@ export async function getStaticPaths() {
 }
 
 type Props = {
-  page: CollectionEntry<'getting-started' | 'essentials' | 'guides'>
+  page: CollectionEntry<CollectionTypes>
+  type: CollectionTypes
 }
 
-const { page } = Astro.props
+const { page, type } = Astro.props
 const { Content } = await page.render()
 ---
 

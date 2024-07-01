@@ -1,6 +1,6 @@
 import { Menu, Orbit } from 'lucide-react'
 import { Icon } from '../components/Icon'
-import siteConfig from '../config/site.json'
+import siteConfig from '../config/site'
 import {
   Sheet,
   SheetContent,
