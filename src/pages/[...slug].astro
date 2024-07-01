@@ -4,8 +4,6 @@ import siteConfig from '../config/site.json'
 import DocumentationLayout from '../layouts/DocumentationLayout.astro'
 import { generateToc } from '../lib/toc'
 
-export const prerender = true
-
 export async function getStaticPaths() {
   const paths = siteConfig.navigation.flatMap((group) =>
     group.pages.map((page) => ({
