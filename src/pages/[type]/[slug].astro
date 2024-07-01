@@ -1,0 +1,29 @@
+---
+import { getCollection, type CollectionEntry } from 'astro:content'
+import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
+
+export async function getStaticPaths() {
+  const collections = ['getting-started', 'essentials', 'guides'] as const
+  const allPages = await Promise.all(
+    collections.map(async (collection) => {
+      const pages = await getCollection(collection)
+      return pages.map((page) => ({
+        params: { type: collection, slug: page.slug },
+        props: { page },
+      }))
+    })
+  )
+  return allPages.flat()
+}
+
+type Props = {
+  page: CollectionEntry<'getting-started' | 'essentials' | 'guides'>
+}
+
+const { page } = Astro.props
+const { Content } = await page.render()
+---
+
+<DocumentationLayout title={page.data.title} toc={[]}>
+  <Content />
+</DocumentationLayout>

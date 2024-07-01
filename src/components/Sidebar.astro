@@ -1,7 +1,8 @@
 ---
 import { Icon } from '../components/Icon'
-import siteConfig from '../config/site.json'
-const { anchors, navigation } = siteConfig
+// import siteConfig from '../config/site.json'
+// const { anchors, navigation } = siteConfig
+const { anchors, navigation } = Astro.props
 const path = Astro.url.pathname
 ---
 
@@ -11,7 +12,7 @@ const path = Astro.url.pathname
       <li>
         <ul role='list' class='-mx-2 space-y-1'>
           {
-            anchors.map((anchor) => (
+            anchors.map((anchor: any) => (
               <li>
                 <a
                   href={anchor.url}
@@ -27,12 +28,12 @@ const path = Astro.url.pathname
         </ul>
       </li>
       {
-        navigation.map(({ pages, group }) => (
+        navigation.map(({ pages, group }: any) => (
           <li>
             <div class='flex flex-col gap-y-2'>
               <div class='text-sm font-medium'>{group}</div>
               <ul class='space-y-1'>
-                {pages.map((page) => (
+                {pages.map((page: any) => (
                   <li class='relative'>
                     <a
                       href={page.url}
