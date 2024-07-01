@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content'
+import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
+import { getCollections, isValidCollectionType } from '../../lib/collections'
+import { type AnyCollectionEntry } from '../../types'
+
+export async function getStaticPaths() {
+  const collections = getCollections()
+  const allPages = await Promise.all(
+    collections.map(async (collection) => {
+      if (isValidCollectionType(collection)) {
+        const pages = await getCollection(collection)
+        return pages.map((page) => ({
+          params: { type: collection, slug: page.slug },
+          props: { page, type: collection },
+        }))
+      }
+      return []
+    })
+  )
+  return allPages.flat()
+}
+
+type Props = {
+  page: AnyCollectionEntry
+  type: string
+}
+
+const { page } = Astro.props
+const { Content } = await page.render()
+---
+
+<DocumentationLayout title={page.data.title} toc={[]}>
+  <Content />
+</DocumentationLayout>

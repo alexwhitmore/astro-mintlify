@@ -1,8 +1,14 @@
 ---
 import { Icon } from '../components/Icon'
-import siteConfig from '../config/site.json'
-const { anchors, navigation } = siteConfig
+import type { Anchor, NavigationItem } from '../types'
 const path = Astro.url.pathname
+
+interface Props {
+  anchors: Anchor[]
+  navigation: NavigationItem[]
+}
+
+const { anchors, navigation } = Astro.props
 ---
 
 <aside class='fixed top-32 hidden shrink-0 lg:block w-56 pl-8'>
