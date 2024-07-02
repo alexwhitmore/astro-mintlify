@@ -3,11 +3,11 @@ import siteConfig from '../config/site'
 export function getPrevNextPage(url: string) {
   console.log('Original URL:', url)
 
-  // Remove the base path if it exists
   const basePath = import.meta.env.BASE_URL || '/'
-  const relativePath = url.startsWith(basePath)
-    ? url.slice(basePath.length)
-    : url
+  let relativePath = url.startsWith(basePath) ? url.slice(basePath.length) : url
+
+  relativePath =
+    relativePath === '/' ? relativePath : relativePath.replace(/\/$/, '')
 
   // Ensure the path starts with a '/'
   const normalizedPath = relativePath.startsWith('/')
