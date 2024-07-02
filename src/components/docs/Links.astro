@@ -10,7 +10,7 @@ const { prevPage, nextPage } = getPrevNextPage(url)
   {
     prevPage && (
       <a
-        href={prevPage.url}
+        href={import.meta.env.BASE_URL + prevPage.url.replace(/^\//, '')}
         class='inline-flex items-center text-sm hover:underline gap-2'>
         <ChevronLeft className='w-3 h-3' />
         {prevPage.name}
@@ -20,7 +20,7 @@ const { prevPage, nextPage } = getPrevNextPage(url)
   {
     nextPage && (
       <a
-        href={nextPage.url}
+        href={import.meta.env.BASE_URL + nextPage.url.replace(/^\//, '')}
         class='inline-flex items-center text-sm hover:underline gap-2'>
         {nextPage.name}
         <ChevronRight className='w-3 h-3' />
