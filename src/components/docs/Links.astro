@@ -1,0 +1,30 @@
+---
+import { ChevronLeft, ChevronRight } from 'lucide-react'
+import { getPrevNextPage } from '../../lib/navigation'
+
+const url = Astro.url.pathname
+const { prevPage, nextPage } = getPrevNextPage(url)
+---
+
+<section class={`my-10 flex ${prevPage ? 'justify-between' : 'justify-end'}`}>
+  {
+    prevPage && (
+      <a
+        href={prevPage.url}
+        class='inline-flex items-center text-sm hover:underline gap-2'>
+        <ChevronLeft className='w-3 h-3' />
+        {prevPage.name}
+      </a>
+    )
+  }
+  {
+    nextPage && (
+      <a
+        href={nextPage.url}
+        class='inline-flex items-center text-sm hover:underline gap-2'>
+        {nextPage.name}
+        <ChevronRight className='w-3 h-3' />
+      </a>
+    )
+  }
+</section>

@@ -13,6 +13,7 @@ interface Props {
 }
 
 const { toc, title } = Astro.props
+import PrevNextLinks from '../components/docs/Links.astro'
 ---
 
 <MainLayout title={title}>
@@ -23,6 +24,7 @@ const { toc, title } = Astro.props
       <div class='min-h-screen'>
         <slot />
       </div>
+      <PrevNextLinks />
       <Footer />
     </main>
     <Toc toc={toc} />
