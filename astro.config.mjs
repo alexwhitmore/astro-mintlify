@@ -13,4 +13,10 @@ export default defineConfig({
   }),
   prefetch: true,
   integrations: [react(), tailwind(), mdx()],
+  markdown: {
+    shikiConfig: {
+      theme: 'dracula',
+      wrap: true,
+    },
+  },
 })
