@@ -3,15 +3,10 @@ import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { getPrevNextPage } from '../../lib/navigation'
 
 const url = Astro.url.pathname
-console.log('Current URL in Links component:', url)
 const { prevPage, nextPage } = getPrevNextPage(url)
 ---
 
 <section class='my-10'>
-  <p>Debug: Current URL: {url}</p>
-  <p>Debug: Prev Page: {prevPage ? JSON.stringify(prevPage) : 'null'}</p>
-  <p>Debug: Next Page: {nextPage ? JSON.stringify(nextPage) : 'null'}</p>
-
   <div class={`flex ${prevPage ? 'justify-between' : 'justify-end'}`}>
     {
       prevPage && (
