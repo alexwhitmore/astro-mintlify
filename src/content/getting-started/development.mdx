@@ -6,10 +6,13 @@ draft: false
 type: getting-started
 ---
 
+import { Code } from 'astro:components'
 import Card from '../../components/Card.astro'
 import CardGrid from '../../components/docs/CardGrid.astro'
 import GroupName from '../../components/docs/GroupName.astro'
 import Callout from '../../components/docs/Callout'
+import DocsAccordion from '../../components/docs/Accordion'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
 
 <GroupName>Getting Started</GroupName>
 
@@ -23,4 +26,32 @@ Learn how to preview changes locally
   variant='callout'
 />
 
-Step 1. Install Mintlify on your OS:
+<DocsAccordion client:load />
+
+This is some dummy text
+
+<CodeBlock
+  client:load
+  tabs={[
+    { label: 'npm', code: 'npm install @astrojs/react', lang: 'bash' },
+    { label: 'yarn', code: 'yarn add @astrojs/react', lang: 'bash' },
+    { label: 'pnpm', code: 'pnpm add @astrojs/react', lang: 'bash' },
+  ]}
+/>
+
+<CodeBlock
+  client:load
+  tabs={[
+    { label: 'JavaScript', code: `function greet(name) {
+  console.log(\`Hello, \${name}!\`);
+}
+
+greet('Astro');
+`, lang: 'javascript' },
+    { label: 'Python', code: `def greet(name):
+print(f"Hello, {name}!")
+
+greet("Astro")
+`, lang: 'python' },
+]}
+/>

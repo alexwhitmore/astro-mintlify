@@ -1,0 +1,172 @@
+---
+// Select new themes from here: https://shiki.style/themes
+import { Code } from 'astro:components'
+import { Copy, Check } from 'lucide-react'
+
+interface Tab {
+  label: string
+  code: string
+  lang: string
+}
+
+interface Props {
+  tabs?: Tab[]
+  code?: string
+  lang?: string
+}
+
+const { tabs, code, lang } = Astro.props
+
+// Check if we have tabs or a single code block
+const hasTabs = tabs && tabs.length > 0
+const singleCode = !hasTabs && code && lang
+
+if (!hasTabs && !singleCode) {
+  console.error('CodeBlock: Either tabs or code and lang must be provided')
+}
+
+const id = `codeblock-${Math.random().toString(36).substr(2, 9)}`
+---
+
+<div id={id} class='code-block relative border rounded-lg mt-5 overflow-hidden'>
+  <div class='flex justify-between items-center border-b'>
+    <div class='flex'>
+      {
+        hasTabs &&
+          tabs.map((tab, index) => (
+            <button
+              class='tab-button px-4 py-2 text-sm text-gray-400 relative group'
+              data-index={index}>
+              <span class='relative z-10 text-xs'>{tab.label}</span>
+              <span class='absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 rounded-md m-[6px] mb-[6px]' />
+              <span class='absolute bottom-0 left-0 w-full h-[1px] bg-green-400 hidden' />
+            </button>
+          ))
+      }
+    </div>
+    <button
+      class='copy-button rounded text-sm z-10 mr-2 flex items-center hover:text-muted-foreground hover:bg-secondary p-1'>
+      <span class='copy-text'>
+        <Copy className='w-3 h-3' />
+      </span>
+      <span class='check-icon hidden'>
+        <Check className='w-3 h-3 text-green-700' />
+      </span>
+    </button>
+  </div>
+
+  <div class='relative'>
+    <div>
+      {
+        hasTabs
+          ? tabs.map((tab, index) => (
+              <div
+                class='tab-content'
+                style={index === 0 ? '' : 'display: none;'}>
+                <Code
+                  code={tab.code}
+                  lang={tab.lang}
+                  theme='github-dark'
+                  class='pb-3 pt-3 pl-2'
+                  style={'bg-rose-400!important'}
+                />
+              </div>
+            ))
+          : singleCode && <Code code={code} lang={lang} theme='dark-plus' />
+      }
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ id }}>
+  ;(function () {
+    const codeBlock = document.getElementById(id)
+    const tabButtons = codeBlock.querySelectorAll('.tab-button')
+    const tabContents = codeBlock.querySelectorAll('.tab-content')
+    const copyButton = codeBlock.querySelector('.copy-button')
+
+    function setupCodeBlock() {
+      if (tabButtons.length > 0) {
+        tabButtons.forEach((button, index) => {
+          button.addEventListener('click', () => {
+            tabButtons.forEach((btn) => {
+              btn.classList.remove('text-green-400')
+              btn.querySelector('span:last-child').classList.add('hidden')
+            })
+            tabContents.forEach((content) => (content.style.display = 'none'))
+
+            button.classList.add('text-green-400')
+            button.querySelector('span:last-child').classList.remove('hidden')
+            tabContents[index].style.display = 'block'
+          })
+        })
+
+        tabButtons[0].classList.add('text-green-400')
+        tabButtons[0]
+          .querySelector('span:last-child')
+          .classList.remove('hidden')
+      }
+
+      copyButton.addEventListener('click', () => {
+        const codeElement = codeBlock.querySelector('pre')
+        const code = codeElement.textContent
+        navigator.clipboard.writeText(code).then(() => {
+          const textSpan = copyButton.querySelector('.copy-text')
+          const iconSpan = copyButton.querySelector('.check-icon')
+
+          textSpan.classList.add('hidden')
+          iconSpan.classList.remove('hidden')
+
+          setTimeout(() => {
+            textSpan.classList.remove('hidden')
+            iconSpan.classList.add('hidden')
+          }, 2000)
+        })
+      })
+    }
+
+    document.addEventListener('DOMContentLoaded', setupCodeBlock)
+    setupCodeBlock()
+  })()
+</script>
+
+<style>
+  pre {
+    background: transparent !important;
+  }
+</style>
+
+<!-- TODO: Use the following tabs from Radix. -->
+<!-- <Tabs client:load defaultValue={tabs[0].label} class='w-full'>
+  <div class='flex justify-between items-center border-b'>
+    <TabsList class='flex'>
+      {tabs.map((tab) => (
+        <TabsTrigger
+          value={tab.label}
+          class='px-4 py-2 text-sm text-gray-400 relative group'>
+          <span class='relative z-10 text-xs'>{tab.label}</span>
+          <span class='absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 rounded-md m-[6px] mb-[6px]' />
+          <span class='absolute bottom-0 left-0 w-full h-[1px] bg-green-400 hidden data-[state=active]:block' />
+        </TabsTrigger>
+      ))}
+    </TabsList>
+    <button class='copy-button rounded text-sm z-10 mr-2 flex items-center hover:text-muted-foreground'>
+      <span class='copy-text'>
+        <Copy className='w-4 h-4' />
+      </span>
+      <span class='check-icon hidden'>
+        <Check className='w-4 h-4 text-green-700' />
+      </span>
+    </button>
+  </div>
+  {tabs.map((tab) => (
+    <TabsContent value={tab.label}>
+      <Code
+        code={tab.code}
+        lang={tab.lang}
+        theme='dark-plus'
+        class='pb-3 pt-3 pl-2 bg-rose-400'
+      />
+    </TabsContent>
+  ))}
+</Tabs> -->
