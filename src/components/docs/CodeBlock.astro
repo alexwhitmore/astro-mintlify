@@ -44,7 +44,7 @@ const id = `codeblock-${Math.random().toString(36).substr(2, 9)}`
               data-index={index}>
               <span class='relative z-10 text-xs'>{tab.label}</span>
               <span class='absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 rounded-md m-[6px] mb-[6px]' />
-              <span class='absolute bottom-0 left-0 w-full h-[1px] bg-green-400 hidden' />
+              <span class='absolute bottom-0 left-0 w-full h-[1px] bg-primary hidden' />
             </button>
           ))
       }
@@ -95,18 +95,18 @@ const id = `codeblock-${Math.random().toString(36).substr(2, 9)}`
         tabButtons.forEach((button, index) => {
           button.addEventListener('click', () => {
             tabButtons.forEach((btn) => {
-              btn.classList.remove('text-green-400')
+              btn.classList.remove('text-primary')
               btn.querySelector('span:last-child').classList.add('hidden')
             })
             tabContents.forEach((content) => (content.style.display = 'none'))
 
-            button.classList.add('text-green-400')
+            button.classList.add('text-primary')
             button.querySelector('span:last-child').classList.remove('hidden')
             tabContents[index].style.display = 'block'
           })
         })
 
-        tabButtons[0].classList.add('text-green-400')
+        tabButtons[0].classList.add('text-primary')
         tabButtons[0]
           .querySelector('span:last-child')
           .classList.remove('hidden')

@@ -98,3 +98,11 @@ h1 ~ p,
 h2 ~ p {
   @apply pt-2 pb-5;
 }
+
+code:not(pre code) {
+  @apply bg-secondary border px-1 py-0.5 rounded text-sm;
+}
+
+blockquote {
+  @apply border-l-4 pl-6 text-foreground/50 font-light py-1;
+}

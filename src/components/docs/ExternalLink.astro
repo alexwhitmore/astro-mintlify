@@ -1,0 +1,13 @@
+---
+interface Props {
+  url: string
+}
+
+const { url } = Astro.props
+---
+
+<a
+  href={url}
+  class='inline-block border-b-2 border-primary/80 hover:border-primary'>
+  <slot />
+</a>
