@@ -2,17 +2,22 @@
 // Select new themes from here: https://shiki.style/themes
 import { Code } from 'astro:components'
 import { Copy, Check } from 'lucide-react'
+import type {
+  BundledLanguage,
+  SpecialLanguage,
+  LanguageRegistration,
+} from 'shiki'
 
 interface Tab {
   label: string
   code: string
-  lang: string
+  lang: BundledLanguage | SpecialLanguage | LanguageRegistration
 }
 
 interface Props {
   tabs?: Tab[]
   code?: string
-  lang?: string
+  lang?: BundledLanguage | SpecialLanguage | LanguageRegistration
 }
 
 const { tabs, code, lang } = Astro.props
