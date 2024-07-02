@@ -1,12 +1,14 @@
-# Astro Mintlify
-
-> [!Warning]
-> This is a very early stage work in progress. More updates soon!
+<div align="center">
+  <h1 align="center"><a href="https://astro-mintlify.vercel.app">Astro Mintlify</a></h1>
+  <p>
+    Astro Mintlify is an open-source project built with <a href='https://github.com/withastro/astro'>Astro</a> and is based on the <a href='https://github.com/mintlify/starter'>Mintlify Starter</a>.
+  </p>
+</div>
 
 ![dual](https://github.com/alexwhitmore/astro-mintlify/assets/57722812/8aa3d2d9-8214-4998-abba-1b3ae20d97d1)
 
-
-Astro Mintlify is an open-source project built with [Astro](https://github.com/withastro/astro) and is based on the [Mintlify Starter](https://github.com/mintlify/starter).
+> [!Warning]
+> This is a very early stage work in progress. More updates soon!
 
 ## Running Locally
 
