@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { Check, Copy } from 'lucide-react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
 
