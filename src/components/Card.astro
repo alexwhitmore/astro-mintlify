@@ -12,10 +12,10 @@ const { header, content, withIcon = false, href = '#' } = Astro.props
 <a href={href} class='border rounded-lg hover:border-primary'>
   <div class='p-4'>
     {withIcon ? <slot /> : ''}
-    <h3
+    <h4
       class='scroll-m-20 pt-4 pb-2 text-lg font-semibold tracking-tight first:mt-0'>
       {header}
-    </h3>
+    </h4>
     <p class='font-light text-sm text-muted-foreground'>
       {content}
     </p>

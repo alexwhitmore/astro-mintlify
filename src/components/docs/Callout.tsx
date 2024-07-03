@@ -25,7 +25,7 @@ const AlertComponent = ({ alertTitle, alertDescription, variant }: Props) => {
   return (
     <Alert
       variant={variant}
-      className={`flex ${!alertTitle ? 'items-center' : ''}`}>
+      className={`flex my-2 ${!alertTitle ? 'items-center' : ''}`}>
       {IconComponent}
       <div>
         <AlertTitle className='mt-1'>{alertTitle}</AlertTitle>

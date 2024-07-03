@@ -7,7 +7,6 @@ type: getting-started
 ---
 
 import ExternalLink from '../../components/docs/ExternalLink.astro'
-import { Code } from 'astro:components'
 import Card from '../../components/Card.astro'
 import CardGrid from '../../components/docs/CardGrid.astro'
 import GroupName from '../../components/docs/GroupName.astro'
@@ -21,40 +20,58 @@ import CodeBlock from '../../components/docs/CodeBlock.astro'
 
 Learn how to preview changes locally
 
-You can combine these. For example, write `**_bold and italic_**` to get bold and italic text. You can combine these. For example, write. You can combine these. For example, write. You can combine these. For example, write
-
 <Callout
-  alertTitle='Heads up!'
-  alertDescription='You can add components to your app using the cli.'
-  variant='callout'
+  alertDescription='Prerequisite: You should have installed Node.js (version 18.10.0 or higher).'
+  variant='info'
 />
 
-<DocsAccordion client:load />
-
-This is some dummy text
-
-> You can combine these. For example, write `**_bold and italic_**` to get bold and italic text. You can combine <ExternalLink url='https://google.com'>Google</ExternalLink>. For example, write. You can combine these. For example, write. You can combine these. For example, write
+Step 1. Install Mintlify on your OS:
 
 <CodeBlock
   tabs={[
-    { label: 'npm', code: 'npm install @astrojs/react', lang: 'bash' },
-    { label: 'yarn', code: 'yarn add @astrojs/react', lang: 'bash' },
-    { label: 'pnpm', code: 'pnpm add @astrojs/react', lang: 'bash' },
+    { label: 'npm', code: 'npm i -g mintlify', lang: 'bash' },
+    { label: 'yarn', code: 'yarn global add mintlify', lang: 'bash' },
   ]}
 />
 
+Step 2. Go to the docs are located (where you can find mint.json) and run the following command:
+
+<CodeBlock code={`mintlify dev`} lang='bash' />
+
+The documentation website is now available at `http://localhost:3000`.
+
+### Custom Ports
+
+Mintlify uses port 3000 by default. You can use the --port flag to customize the port Mintlify runs on. For example, use this command to run in port 3333:
+
+<CodeBlock code={`mintlify dev --port 3333`} lang='bash' />
+
+You will see an error like this if you try to run Mintlify in a port that’s already taken:
+
+<CodeBlock
+  code={`Error: listen EADDRINUSE: address already in use :::3000
+`}
+  lang='javascript'
+/>
+
+### Mintlify Versions
+
+Each CLI is linked to a specific version of Mintlify. Please update the CLI if your local website looks different than production.
+
 <CodeBlock
   tabs={[
-    { label: 'JavaScript', code: `function greet(name) {
-  console.log(\`Hello, \${name}!\`);
-}
-
-greet('Astro');
-`, lang: 'javascript' },
-    { label: 'Python', code: `def greet(name):
-print(f"Hello, {name}!")
-
-greet("Astro")
-`, lang: 'python' },
-]}
+    { label: 'npm', code: 'npm i -g mintlify@latest', lang: 'bash' },
+    { label: 'yarn', code: 'yarn global upgrade mintlify', lang: 'bash' },
+  ]}
 />
+
+### Deployment
+
+<Callout
+  alertDescription='Unlimited editors available under the Startup Plan'
+  variant='callout'
+/>
+
+You should see the following if the deploy successfully went through:
+
+![alt text](https://mintlify.s3-us-west-1.amazonaws.com/starter/images/checks-passed.png)

@@ -99,10 +99,35 @@ h2 ~ p {
   @apply pt-2 pb-5;
 }
 
+h3 {
+  @apply pt-5;
+}
+
 code:not(pre code) {
   @apply bg-secondary border px-1 py-0.5 rounded text-sm;
 }
 
 blockquote {
-  @apply border-l-4 pl-6 text-foreground/50 font-light py-1;
+  @apply border-l-4 pl-6 text-foreground/80 font-light py-1;
+}
+
+ul:not(.unstyled):not([class]) {
+  @apply pl-6 my-4 space-y-2;
+}
+
+ul:not(.unstyled):not([class]) > li {
+  @apply relative;
+}
+
+ul:not(.unstyled):not([class]) > li::before {
+  content: '';
+  @apply absolute w-1.5 h-1.5 bg-foreground/50 rounded-full left-[-1rem] top-[0.5rem];
+}
+
+ol:not(.unstyled):not([class]) {
+  @apply pl-6 my-4 space-y-2 list-decimal;
+}
+
+ol:not(.unstyled):not([class]) > li {
+  @apply pl-1 marker:text-foreground/50 marker:font-semibold;
 }

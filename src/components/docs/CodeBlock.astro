@@ -21,8 +21,6 @@ interface Props {
 }
 
 const { tabs, code, lang } = Astro.props
-
-// Check if we have tabs or a single code block
 const hasTabs = tabs && tabs.length > 0
 const singleCode = !hasTabs && code && lang
 
@@ -33,32 +31,34 @@ if (!hasTabs && !singleCode) {
 const id = `codeblock-${Math.random().toString(36).substr(2, 9)}`
 ---
 
-<div id={id} class='code-block relative border rounded-lg mt-5 overflow-hidden'>
-  <div class='flex justify-between items-center border-b'>
-    <div class='flex'>
-      {
-        hasTabs &&
-          tabs.map((tab, index) => (
+<div
+  id={id}
+  class={`code-block relative rounded-lg overflow-hidden border mb-5`}>
+  {
+    hasTabs && (
+      <div class='flex justify-between items-center border-b border-secondary/20 bg-foreground dark:bg-transparent dark:border-border'>
+        <div class='flex'>
+          {tabs.map((tab, index) => (
             <button
               class='tab-button px-4 py-2 text-sm text-gray-400 relative group'
               data-index={index}>
               <span class='relative z-10 text-xs'>{tab.label}</span>
               <span class='absolute inset-0 bg-gray-800 opacity-0 group-hover:opacity-100 rounded-md m-[6px] mb-[6px]' />
-              <span class='absolute bottom-0 left-0 w-full h-[1px] bg-primary hidden' />
+              <span class='absolute bottom-0 left-0 w-full h-[1px] bg-primary hidden mb-[-1px]' />
             </button>
-          ))
-      }
-    </div>
-    <button
-      class='copy-button rounded text-sm z-10 mr-2 flex items-center hover:text-muted-foreground hover:bg-secondary p-1'>
-      <span class='copy-text'>
-        <Copy className='w-3 h-3' />
-      </span>
-      <span class='check-icon hidden'>
-        <Check className='w-3 h-3 text-green-700' />
-      </span>
-    </button>
-  </div>
+          ))}
+        </div>
+        <button class='copy-button absolute top-2 right-2 rounded text-sm z-10 flex items-center hover:text-muted-foreground dark:hover:bg-secondary hover:bg-gray-700 p-1 group'>
+          <span class='copy-text flex items-center'>
+            <Copy className='w-3 h-3 text-white dark:group-hover:text-muted-foreground group-hover:text-secondary' />
+          </span>
+          <span class='check-icon hidden'>
+            <Check className='w-3 h-3 text-green-500 ' />
+          </span>
+        </button>
+      </div>
+    )
+  }
 
   <div class='relative'>
     <div>
@@ -72,12 +72,28 @@ const id = `codeblock-${Math.random().toString(36).substr(2, 9)}`
                   code={tab.code}
                   lang={tab.lang}
                   theme='github-dark'
-                  class='pb-3 pt-3 pl-2'
-                  style={'bg-rose-400!important'}
+                  class='pb-3 pt-3 pl-4'
                 />
               </div>
             ))
-          : singleCode && <Code code={code} lang={lang} theme='dark-plus' />
+          : singleCode && (
+              <div class='relative'>
+                <Code
+                  code={code}
+                  lang={lang}
+                  theme='dark-plus'
+                  class='pb-3 pt-3 pl-4'
+                />
+                <button class='copy-button absolute top-2 right-2 rounded text-sm z-10 flex items-center hover:text-muted-foreground dark:hover:bg-secondary hover:bg-gray-700 p-1 group'>
+                  <span class='copy-text flex items-center'>
+                    <Copy className='w-3 h-3 text-white dark:group-hover:text-muted-foreground group-hover:text-secondary' />
+                  </span>
+                  <span class='check-icon hidden'>
+                    <Check className='w-3 h-3 text-green-500 ' />
+                  </span>
+                </button>
+              </div>
+            )
       }
     </div>
   </div>
@@ -138,6 +154,10 @@ const id = `codeblock-${Math.random().toString(36).substr(2, 9)}`
 <style>
   pre {
     background: transparent !important;
+  }
+
+  html[data-theme='light'] pre {
+    @apply bg-foreground !important;
   }
 </style>
 

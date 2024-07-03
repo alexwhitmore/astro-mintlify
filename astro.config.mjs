@@ -13,10 +13,21 @@ export default defineConfig({
   }),
   prefetch: true,
   integrations: [react(), tailwind(), mdx()],
+  // markdown: {
+  //   shikiConfig: {
+  //     theme: 'dracula',
+  //     wrap: true,
+  //   },
+  // },
   markdown: {
-    shikiConfig: {
-      theme: 'dracula',
-      wrap: true,
+    async shikiConfig() {
+      const highlighter = await getHighlighter({
+        themes: ['github-light', 'dracula'],
+      })
+      return {
+        highlighter,
+        wrap: true,
+      }
     },
   },
 })
