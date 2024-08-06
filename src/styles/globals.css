@@ -87,7 +87,7 @@ h1 {
 }
 
 h2 {
-  @apply scroll-mt-28 text-3xl font-extrabold tracking-tight lg:text-4xl my-2;
+  @apply scroll-mt-28 text-2xl font-extrabold tracking-tight lg:text-3xl my-2;
 }
 
 h3 {
@@ -108,11 +108,15 @@ code:not(pre code) {
 }
 
 blockquote {
-  @apply border-l-4 pl-6 text-foreground/80 font-light py-1;
+  @apply border-l-4 pl-4 text-foreground/70  py-1;
 }
 
-ul:not(.unstyled):not([class]) {
+/* ul:not(.unstyled):not([class]) {
   @apply pl-6 my-4 space-y-2;
+} */
+
+ul:not(.unstyled):not([class]) {
+  @apply pl-6 mb-4 space-y-2;
 }
 
 ul:not(.unstyled):not([class]) > li {
@@ -130,4 +134,8 @@ ol:not(.unstyled):not([class]) {
 
 ol:not(.unstyled):not([class]) > li {
   @apply pl-1 marker:text-foreground/50 marker:font-semibold;
+}
+
+img {
+  @apply rounded-2xl border;
 }

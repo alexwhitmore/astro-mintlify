@@ -15,7 +15,7 @@ export function generateToc(
     const heading = { ...h, children: [] }
     parentHeadings.set(heading.depth, heading)
 
-    if (heading.depth === 2) {
+    if (heading.depth === 2 || heading.depth === 3) {
       toc.push(heading)
     } else if (heading.depth <= maxDepth) {
       const parent = parentHeadings.get(heading.depth - 1)

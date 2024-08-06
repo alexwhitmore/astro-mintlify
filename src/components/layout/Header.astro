@@ -1,5 +1,5 @@
 ---
-import { ChevronRight, Command, Orbit, Search } from 'lucide-react'
+import { ChevronRight, Command, Search } from 'lucide-react'
 import { SearchDialog } from '../SearchDialog'
 import { SettingsDropdown } from '../SettingsDropdown'
 import ThemeToggle from '../ThemeToggle.astro'
@@ -14,10 +14,33 @@ import SubHeader from './SubHeader.astro'
           href='/'
           class='flex gap-2 items-center'
           aria-label='Astro documentation'>
-          <Orbit className='w-6 h-6' />
+          <div class='w-8 h-8 hidden dark:block'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 65 65'
+              ><path
+                fill='#FFF'
+                d='M39.445 25.555 37 17.163 65 0 47.821 28l-8.376-2.445Zm-13.89 0L28 17.163 0 0l17.179 28 8.376-2.445Zm13.89 13.89L37 47.837 65 65 47.821 37l-8.376 2.445Zm-13.89 0L28 47.837 0 65l17.179-28 8.376 2.445Z'
+              ></path></svg
+            >
+          </div>
+
+          <div class='w-8 h-8 dark:hidden block'>
+            <svg
+              xmlns='http://www.w3.org/2000/svg'
+              fill='none'
+              viewBox='0 0 65 65'
+              ><path
+                fill='#000'
+                d='M39.445 25.555 37 17.163 65 0 47.821 28l-8.376-2.445Zm-13.89 0L28 17.163 0 0l17.179 28 8.376-2.445Zm13.89 13.89L37 47.837 65 65 47.821 37l-8.376 2.445Zm-13.89 0L28 47.837 0 65l17.179-28 8.376 2.445Z'
+              ></path></svg
+            >
+          </div>
+
           <h4 class='text-xl'>
-            <span class='font-extrabold'>astro</span>
-            <span class='font-normal'>docs</span>
+            <span class='font-extrabold'>Epic</span>
+            <span class='font-normal'>Stack</span>
           </h4>
         </a>
       </div>

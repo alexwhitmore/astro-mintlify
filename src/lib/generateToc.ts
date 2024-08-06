@@ -1,4 +1,3 @@
-// lib/toc.ts
 import type { MarkdownHeading } from 'astro'
 
 export interface TocItem extends MarkdownHeading {

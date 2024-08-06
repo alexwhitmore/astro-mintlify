@@ -1,0 +1,76 @@
+---
+title: 'Features'
+date: '2024-06-28'
+description: 'Learn about all out of the box features that Epic Stack provides.'
+draft: false
+type: introduction
+---
+
+import GroupName from '../../components/docs/GroupName.astro'
+
+<GroupName>Introduction</GroupName>
+
+# Features
+
+Here are the features you get today with Epic Stack:
+
+## Core Technologies
+
+- **Web Framework:** [Remix](https://remix.run/)
+- **Database:** Multi-region, distributed [SQLite](https://sqlite.org/) with [LiteFS](https://fly.io/docs/litefs/)
+- **ORM:** [Prisma](https://prisma.io/)
+- **Deployment:** [Fly app deployment](https://fly.io/) with [Docker](https://www.docker.com/)
+
+## Development Tools
+
+- **CI/CD:** [GitHub Actions](https://github.com/features/actions) with testing and deployment
+- **Testing:**
+  - End-to-end with [Playwright](https://playwright.dev/)
+  - Unit testing with [Vitest](https://vitest.dev/) and [Testing Library](https://testing-library.com/)
+  - Local third party request mocking with [MSW](https://mswjs.io/)
+- **Code Quality:**
+  - Formatting with [Prettier](https://prettier.io/)
+  - Linting with [ESLint](https://eslint.org/)
+- **Type Safety:** [TypeScript](https://typescriptlang.org/)
+- **Validation:** Runtime schema validation with [zod](https://zod.dev/)
+
+## Security & Authentication
+
+- **Authentication:**
+  - Email/Password with [cookie-based sessions](https://remix.run/utils/sessions#md-createcookiesessionstorage)
+  - Two-Factor Authentication (2FA)
+- **Permissions:** Role-based User Permissions
+
+## User Experience & Frontend
+
+- **Styling:** [Tailwind](https://tailwindcss.com/)
+- **UI Components:** [Radix UI](https://www.radix-ui.com/)
+- **Forms:** Enhanced with [Conform](https://conform.guide/)
+- **Image Handling:** Custom built image hosting
+- **Theming:** Light/Dark/System mode
+
+## Performance & Monitoring
+
+- **Caching:** [cachified](https://npm.im/@epic-web/cachified) (in-memory and SQLite-based)
+- **Monitoring:**
+  - Healthcheck endpoint for [Fly backups region fallbacks](https://fly.io/docs/reference/configuration/#services-http_checks)
+  - [Grafana](https://grafana.com/) Dashboards
+- **Error Monitoring:** [Sentry](https://sentry.io/welcome/)
+
+## Communication
+
+- **Email:** Transactional email with [Resend](https://resend.com/)
+
+## Planned Features
+
+The following features are being considered for future inclusion:
+
+- Logging
+- Ecommerce support with [Stripe](https://stripe.com/)
+- Ethical site analytics with [fathom](https://usefathom.com/)
+- Internationalization
+- Image optimization route and component
+- Feature flags
+- Documentation on production data seeding process
+
+Not a fan of bits of the stack? Fork it, change it, and use `npx create-remix --template your/repo`! Make it your own.

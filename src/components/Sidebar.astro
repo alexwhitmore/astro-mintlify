@@ -1,5 +1,5 @@
 ---
-import { Icon } from '../components/Icon'
+import { SidebarContent } from '../components/ScrollArea'
 import type { Anchor, NavigationItem } from '../types'
 
 const rawPath = Astro.url.pathname
@@ -11,63 +11,13 @@ interface Props {
 }
 
 const { anchors, navigation } = Astro.props
-
-function isActive(pageUrl: string) {
-  const normalizedPageUrl = pageUrl === '/' ? '/' : pageUrl.replace(/\/$/, '')
-  const isExactMatch = path === normalizedPageUrl
-  const isParentMatch = path.startsWith(normalizedPageUrl + '/')
-  return isExactMatch || isParentMatch
-}
 ---
 
-<aside class='fixed top-32 hidden shrink-0 lg:block w-56 pl-8'>
-  <nav class='flex flex-1 flex-col'>
-    <ul role='list' class='flex flex-1 flex-col gap-y-7'>
-      <li>
-        <ul role='list' class='-mx-2 space-y-1'>
-          {
-            anchors.map((anchor) => (
-              <li>
-                <a
-                  href={anchor.url}
-                  class='group flex gap-x-3 rounded-md py-1 text-sm font-medium leading-6 items-center text-muted-foreground hover:text-foreground'>
-                  <div class='border rounded-md p-1 group-hover:bg-primary/30 group-hover:text-primary'>
-                    <Icon iconName={anchor.icon} className='h-4 w-4' />
-                  </div>
-                  {anchor.name}
-                </a>
-              </li>
-            ))
-          }
-        </ul>
-      </li>
-      {
-        navigation.map(({ pages, group }) => (
-          <li>
-            <div class='flex flex-col gap-y-2'>
-              <div class='text-sm font-medium'>{group}</div>
-              <ul class='space-y-1'>
-                {pages.map((page) => {
-                  const active = isActive(page.url)
-                  return (
-                    <li class='relative'>
-                      <a
-                        href={page.url}
-                        class={
-                          active
-                            ? 'text-primary bg-primary/10 block -ml-2 pl-2 py-1 pr-2 rounded-md text-sm font-light'
-                            : 'block -ml-2 pl-2 hover:bg-primary/10 py-1 pr-2 rounded-md text-sm font-light hover:text-primary text-muted-foreground'
-                        }>
-                        {page.name}
-                      </a>
-                    </li>
-                  )
-                })}
-              </ul>
-            </div>
-          </li>
-        ))
-      }
-    </ul>
-  </nav>
+<aside class='fixed top-32 hidden shrink-0 lg:block w-72 pl-8'>
+  <SidebarContent
+    client:load
+    anchors={anchors}
+    navigation={navigation}
+    currentPath={path}
+  />
 </aside>

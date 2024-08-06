@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content'
 import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
 import { getCollections, isValidCollectionType } from '../../lib/collections'
+import { generateToc } from '../../lib/toc'
 import { type AnyCollectionEntry } from '../../types'
 
 export async function getStaticPaths() {
@@ -27,9 +28,10 @@ type Props = {
 }
 
 const { page } = Astro.props
-const { Content } = await page.render()
+const { Content, headings } = await page.render()
+const tocItems = generateToc(headings)
 ---
 
-<DocumentationLayout title={page.data.title} toc={[]}>
+<DocumentationLayout title={page.data.title} toc={tocItems}>
   <Content />
 </DocumentationLayout>

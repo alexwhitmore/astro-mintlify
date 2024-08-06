@@ -13,7 +13,6 @@ export async function getStaticPaths() {
 
 const { type } = Astro.params as { type: string }
 let pages: AnyCollectionEntry[] = []
-
 if (isValidCollectionType(type)) {
   pages = await getCollection(type)
 } else {
@@ -24,9 +23,17 @@ const groupInfo = siteConfig.navigation.find((nav) => nav.type === type)
 if (!groupInfo) {
   throw new Error(`No group info found for type: ${type}`)
 }
+
+// Generate a TOC from the page titles
+const tocItems = pages.map((page) => ({
+  depth: 2,
+  slug: page.slug,
+  text: page.data.title,
+  children: [],
+}))
 ---
 
-<DocumentationLayout title={groupInfo.group} toc={[]}>
+<DocumentationLayout title={groupInfo.group} toc={tocItems}>
   <h1>{groupInfo.group}</h1>
   <ul>
     {
