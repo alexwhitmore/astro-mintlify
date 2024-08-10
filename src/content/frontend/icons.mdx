@@ -1,0 +1,58 @@
+---
+title: 'Icons'
+date: '2024-06-28'
+description: 'Learn how to use and manage icons in the Epic Stack using SVG sprites for optimal performance.'
+draft: false
+type: 'frontend'
+---
+
+import GroupName from '../../components/docs/GroupName.astro'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
+
+<GroupName>Frontend</GroupName>
+
+# Icons
+
+The Epic Stack uses SVG sprites for [optimal icon performance](https://benadam.me/thoughts/react-svg-sprites/). This approach ensures efficient loading and usage of icons throughout your application.
+
+## Icon Management
+
+- Raw SVGs are stored in the `./other/svg-icons` directory.
+- These SVGs are compiled into a sprite using the `npm run build:icons` script.
+- This script generates:
+  - An `icon.svg` file (the sprite)
+  - An `icons.json` manifest file (for TypeScript support)
+
+## Adding New Icons
+
+You can use [Sly](https://github.com/jacobparis-insiders/sly/tree/main/cli) to add new icons from the command line.
+
+To add specific icons:
+
+<CodeBlock
+  code={`npx sly add @radix-ui/icons trash pencil-1 avatar`}
+  lang='bash'
+/>
+
+If you don't specify icons, Sly will show an interactive list of all available icons from the `@radix-ui/icons` collection.
+
+Sly is pre-configured in the Epic Stack to:
+
+- Add icons to the `./other/svg-icons` directory
+- Automatically run the `npm run build:icons` script
+
+You can find the Sly configuration in the `./other/sly/sly.json` file.
+
+## Manual Icon Addition
+
+1. Download SVG icons from [icons.radix-ui.com](https://icons.radix-ui.com/) or use your own.
+2. Add the SVG files to the `./other/svg-icons` directory.
+3. Run `npm run build:icons` to update the sprite and manifest.
+
+## Using Icons
+
+Use the `Icon` component to render icons. The `icon` prop should be the filename without the `.svg` extension.
+
+Example:
+
+<CodeBlock code={`<Icon icon='trash' />`} lang='jsx' />

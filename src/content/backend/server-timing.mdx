@@ -1,0 +1,105 @@
+---
+title: 'Server Timing'
+date: '2024-06-28'
+description: 'Learn how to use server timing utilities in the Epic Stack to measure application performance.'
+draft: false
+type: 'backend'
+---
+
+import GroupName from '../../components/docs/GroupName.astro'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
+import { Image } from 'astro:assets'
+import serverTimingImage from '../../assets/server-timing.png'
+
+<GroupName>Backend</GroupName>
+
+# Server Timing
+
+The Epic Stack includes a built-in server timing utility that allows you to measure the performance of your application. This feature leverages the `Server-Timing` header to provide fine-grained timing metrics for requests made in your app.
+
+<Image
+  src={serverTimingImage}
+  alt="Network tab of Chrome DevTools showing the Timing tab of a specific network call and an arrow pointing to the Server Timing section with the words 'This is what server timings do'"
+/>
+
+You can find the server timing utility in the `app/utils/timing.server.ts` file.
+
+## How It Works
+
+The `Server-Timing` header allows you to pass timing metrics that will be visually displayed in [the DevTools "Timing" tab](https://developer.chrome.com/docs/devtools/network/reference/#timing).
+
+For more information, see the [MDN documentation on the Server Timing header](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Server-Timing).
+
+## Usage
+
+Implementing server timing requires four parts:
+
+1. Setup Timings
+2. Time functions
+3. Create headers
+4. Send headers
+
+Here's an example of how to use server timing in a route:
+
+<CodeBlock
+  code={`import {
+  combineServerTimings,
+  makeTimings,
+  time,
+} from '#app/utils/timing.server.ts'
+
+export async function loader({ params }: LoaderFunctionArgs) {
+  const timings = makeTimings('notes loader') // <-- 1. Setup Timings
+  
+  // 2. Time functions
+  const owner = await time(
+    () =>
+      prisma.user.findUnique({
+        where: {
+          username: params.username,
+        },
+        select: {
+          id: true,
+          username: true,
+          name: true,
+          imageId: true,
+        },
+      }),
+    { timings, type: 'find user' },
+  )
+  if (!owner) {
+    throw new Response('Not found', { status: 404 })
+  }
+  
+  // 2. Time functions
+  const notes = await time(
+    () =>
+      prisma.note.findMany({
+        where: {
+          ownerId: owner.id,
+        },
+        select: {
+          id: true,
+          title: true,
+        },
+      }),
+    { timings, type: 'find notes' },
+  )
+  
+  return json(
+    { owner, notes },
+    { headers: { 'Server-Timing': timings.toString() } }, // <-- 3. Create headers
+  )
+}
+
+export const headers: HeadersFunction = ({ loaderHeaders, parentHeaders }) => {
+  return {
+    'Server-Timing': combineServerTimings(parentHeaders, loaderHeaders), // <-- 4. Send headers
+  }
+}`}
+  lang="typescript"
+/>
+
+Note: The Epic Stack has the v2 behavior enabled for Remix's `headers` function. You can [learn more about `headers` in the Remix docs](https://remix.run/docs/en/main/route/headers).
+
+By implementing server timing, you can gain valuable insights into the performance of your application, helping you identify and optimize slow operations.

@@ -1,0 +1,34 @@
+---
+title: 'Client Hints'
+date: '2024-06-28'
+description: 'Learn about Client Hints in the Epic Stack and how they help eliminate content layout shift.'
+draft: false
+type: 'frontend'
+---
+
+import GroupName from '../../components/docs/GroupName.astro'
+import { Image } from 'astro:assets'
+import clientHintsImage from '../../assets/client-hints.jpg'
+
+<GroupName>Core Concepts</GroupName>
+
+# Client Hints
+
+> **NOTE:** For background on this concept, refer to the decision document: `0005-client-pref-cookies.md`.
+
+You can watch a tip about Client Hints on [EpicWeb.dev](https://www.epicweb.dev/tips/use-client-hints-to-eliminate-content-layout-shift):
+
+<a
+  href='https://www.epicweb.dev/tips/use-client-hints-to-eliminate-content-layout-shift'
+  target='_blank'
+  rel='noopener noreferrer'>
+  <Image
+    src={clientHintsImage}
+    alt='Kent smiling with VSCode showing code in the client-hints.tsx file'
+    class='mb-5'
+  />
+</a>
+
+## Package location
+
+This functionality has been moved into `@epic-web/client-hints` and is the primary source for documentation on this feature. Our integration can be found in `app/utils/client-hints.tsx`.

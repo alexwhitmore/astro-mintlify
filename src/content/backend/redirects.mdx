@@ -1,0 +1,94 @@
+---
+title: 'Redirects'
+date: '2024-06-28'
+description: 'Learn how to handle redirects in the Epic Stack using Express middleware.'
+draft: false
+type: 'backend'
+---
+
+import GroupName from '../../components/docs/GroupName.astro'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
+
+<GroupName>Backend</GroupName>
+
+# Redirects
+
+In the Epic Stack, redirects are handled using Express middleware. This approach improves performance as incoming requests are processed by Express before reaching Remix.
+
+## HTTP to HTTPS Redirect
+
+All traffic is automatically forced to HTTPS for security reasons. This prevents request interception and does not affect localhost.
+
+<CodeBlock
+  code={`app.use((req, res, next) => {
+  const proto = req.get('X-Forwarded-Proto')
+  const host = getHost(req)
+  if (proto === 'http') {
+    res.set('X-Forwarded-Proto', 'https')
+    res.redirect(\`https://\${host}\${req.originalUrl}\`)
+    return
+  }
+  next()
+})`}
+  lang='typescript'
+/>
+
+## Removing Trailing Slashes
+
+Trailing slashes are automatically removed from URLs. For example, `https://example.com/foo/` is redirected to `https://example.com/foo`.
+
+This is crucial for SEO, as it prevents search engines from treating these as separate pages with duplicate content.
+
+<CodeBlock
+  code={`app.use((req, res, next) => {
+  if (req.path.endsWith('/') && req.path.length > 1) {
+    const query = req.url.slice(req.path.length)
+    const safepath = req.path.slice(0, -1).replace(/\\/+/g, '/')
+    res.redirect(301, safepath + query)
+  } else {
+    next()
+  }
+})`}
+  lang='typescript'
+/>
+
+## WWW Subdomain Handling
+
+You can redirect root domain traffic to your www subdomain or vice versa. This is particularly important for Fly.io deployments, as DNS level redirects do not work with Fly.
+
+### Prerequisites
+
+1. Register SSL certificates for both www and root domains.
+2. You can do this via the [Fly CLI](https://fly.io/docs/getting-started/working-with-fly-apps/#fly-io-and-custom-domains) or the [Fly dashboard](https://fly.io/dashboard/).
+
+### Redirect Options
+
+#### To redirect non-www traffic to www:
+
+<CodeBlock
+  code={`app.use((req, res, next) => {
+  const host = getHost(req)
+  if (!host.startsWith('www.')) {
+    return res.redirect(301, \`https://www.\${host}\${req.url}\`)
+  } else {
+    next()
+  }
+})`}
+  lang='typescript'
+/>
+
+#### To redirect www traffic to non-www:
+
+<CodeBlock
+  code={`app.use((req, res, next) => {
+  const host = getHost(req)
+  if (host.startsWith('www.')) {
+    return res.redirect(301, \`https://\${host.slice(4)}\${req.url}\`)
+  } else {
+    next()
+  }
+})`}
+  lang='typescript'
+/>
+
+By implementing these redirects, you can ensure that your Epic Stack application handles various URL scenarios correctly, improving both security and SEO performance.
