@@ -29,7 +29,9 @@ export const MenuButton = ({ path }: { path: string }) => {
             </SheetTitle>
           </SheetHeader>
           <ScrollArea className='h-[calc(100vh-5rem)] mt-5'>
-            <ul role='list' className='flex flex-1 flex-col gap-y-7 pl-2 mr-5'>
+            <ul
+              role='list'
+              className='flex flex-1 flex-col gap-y-7 pl-2 mr-5 mb-10'>
               <li>
                 <ul role='list' className='-mx-2 space-y-1'>
                   {anchors.map((anchor) => (
