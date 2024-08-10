@@ -6,7 +6,7 @@ import ThemeToggle from '../ThemeToggle.astro'
 import SubHeader from './SubHeader.astro'
 ---
 
-<header class='fixed shrink-0 w-full bg-background-blur backdrop-blur-lg z-50'>
+<header class='fixed shrink-0 w-full z-50 bg-background'>
   <nav class='px-4 h-14 lg:px-0'>
     <div class='flex justify-between items-center h-full border-b lg:px-10'>
       <div>
@@ -64,15 +64,20 @@ import SubHeader from './SubHeader.astro'
       </div>
 
       <div class='hidden lg:flex gap-2 items-center'>
-        <button
+        <a
+          href='/miscellaneous/community'
           class='hidden h-8 rounded-md px-3 text-sm lg:inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
-          >Support</button
+          >Support</a
         >
-        <button
+        <a
+          href='https://github.com/epicweb-dev/epic-stack'
+          type='button'
+          target='_blank'
+          rel='noopener noreferrer'
           class='hidden bg-primary dark:bg-primary/10 h-8 rounded-full px-3 text-sm lg:inline-flex items-center justify-center border whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 border-primary text-primary-foreground dark:text-primary gap-2 mr-2'>
-          Dashboard
+          GitHub
           <ChevronRight className='w-3 h-3' />
-        </button>
+        </a>
       </div>
 
       <div class='flex'>

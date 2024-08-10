@@ -23,7 +23,8 @@ const siteConfig: SiteConfig = {
       group: 'Introduction',
       type: 'introduction',
       pages: [
-        { name: 'Getting Started', url: '/' },
+        { name: 'Introduction', url: '/' },
+        { name: 'Getting Started', url: '/introduction/getting-started' },
         { name: 'Features', url: '/introduction/features' },
         { name: 'Guiding Principles', url: '/introduction/guiding-principles' },
       ],

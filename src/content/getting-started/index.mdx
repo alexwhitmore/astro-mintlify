@@ -6,71 +6,84 @@ draft: false
 type: getting-started
 ---
 
+import {
+  SquarePen,
+  Image as ImageIcon,
+  Wrench,
+  Code,
+  Sparkles,
+  SwatchBook,
+  ChevronRight,
+  Info,
+  Star,
+  Rocket,
+  Lightbulb,
+} from 'lucide-react'
+import Card from '../../components/Card.astro'
+import CardGrid from '../../components/docs/CardGrid.astro'
 import GroupName from '../../components/docs/GroupName.astro'
-import CodeBlock from '../../components/docs/CodeBlock.astro'
-import Callout from '../../components/docs/Callout'
 import ExternalLink from '../../components/docs/ExternalLink.astro'
 
-# Getting Started with the Epic Stack
+<GroupName>Getting Started</GroupName>
 
-The Epic Stack is a <ExternalLink url='https://remix.run/stacks'>Remix Stack</ExternalLink> designed to streamline your development process. Follow these steps to get started:
+## Introduction
 
-## Create Your Project
+Ditch analysis paralysis and start shipping Epic Web apps.
 
-Run the following command in your terminal:
+![Hero Image](../../assets/epic-stack.png)
 
-<CodeBlock code={`npx create-epic-app@latest`} lang='bash' />
+The goal of The Epic Stack is to provide solid opinions for teams to hit the ground running on their web applications. We recommend you watch <ExternalLink url='https://www.epicweb.dev/talks/the-epic-stack'>Kent's introduction</ExternalLink> to the Epic Stack to get an understanding of the "why" behind the Stack.
 
-This will:
+## About the Epic Stack
 
-- Prompt you for a project name (directory to store your project)
-- Start the CLI setup process
+<CardGrid>
+  <Card
+    header='Guiding principles'
+    content='The guiding principles behind the Epic Stack.'
+    href='/introduction/guiding-principles'
+    withIcon>
+    <Lightbulb className='stroke-primary' />
+  </Card>
+  <Card
+    header='Decisions'
+    content='The reasoning behind various decisions made for the Epic Stack. A good historical record.'
+    href='https://github.com/epicweb-dev/epic-stack/tree/main/docs/decisions'
+    withIcon>
+    <Rocket className='stroke-primary' />
+  </Card>
+</CardGrid>
 
-## Navigate to Your Project
+<div class='mt-16' />
 
-Once setup is complete:
+## Best Places to Start
 
-<CodeBlock code={`cd your-project-name`} lang='bash' />
-
-## Start Development Server
-
-Launch your app in development mode:
-
-<CodeBlock code={`npm run dev`} lang='bash' />
-
-> This rebuilds assets on file changes.
-
-## Check Deployment Instructions
-
-Refer to the project's <ExternalLink url='#'>documentation</ExternalLink> documentation for deployment guidance. It's recommended to set this up early.
-
-## Customizing Setup
-
-To skip certain setup steps, use these environment variables:
-
-- `SKIP_SETUP` skips running `npm run setup`
-- `SKIP_FORMAT` skips running `npm run format`
-- `SKIP_DEPLOYMENT` skips running deployment setup
-
-So, if you enabled all of these it would be:
-
-<CodeBlock
-  code={`SKIP_SETUP=true SKIP_FORMAT=true SKIP_DEPLOYMENT=true npx create-epic-app@latest`}
-  lang='bash'
-/>
-
-For Windows:
-
-<CodeBlock
-  code={`set SKIP_SETUP=true && set SKIP_FORMAT=true && set SKIP_DEPLOYMENT=true && npx create-epic-app@latest`}
-  lang='bash'
-/>
-
-This starts your app in development mode, rebuilding assets on file changes.
-
-## Default User
-
-The database seed script creates a new user with some data you can use to get started:
-
-- Username: `kody`
-- Password: `kodylovesyou`
+<CardGrid>
+  <Card
+    header='Getting started'
+    content='Instructions for how to get started with the Epic Stack.'
+    href='/introduction/getting-started'
+    withIcon>
+    <Info className='stroke-primary' />
+  </Card>
+  <Card
+    header='Features'
+    content='List of features the Epic Stack provides out of the box.'
+    href='/introduction/features'
+    withIcon>
+    <Star className='stroke-primary' />
+  </Card>
+  <Card
+    header='Deployment'
+    content='The manual steps you can follow to get things up and running.'
+    href='/deployment-operations/deployment'
+    withIcon>
+    <Rocket className='stroke-primary' />
+  </Card>
+  <Card
+    header='Examples'
+    content='Examples of the Epic Stack with various tools.'
+    href='/miscellaneous/examples'
+    withIcon>
+    <Code className='stroke-primary' />
+  </Card>
+</CardGrid>
