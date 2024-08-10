@@ -30,6 +30,8 @@ export function SidebarContent({
                 <li key={anchor.url}>
                   <a
                     href={anchor.url}
+                    target='_blank'
+                    rel='noopener noreferrer'
                     className='group flex gap-x-3 rounded-md py-1 px-2 text-sm font-medium leading-6 items-center text-muted-foreground hover:text-foreground'>
                     <div className='border rounded-md p-1 group-hover:bg-primary/30'>
                       <Icon

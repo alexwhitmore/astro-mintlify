@@ -1,6 +1,5 @@
 ---
 import { ChevronRight, Command, Search } from 'lucide-react'
-import { SearchDialog } from '../SearchDialog'
 import { SettingsDropdown } from '../SettingsDropdown'
 import ThemeToggle from '../ThemeToggle.astro'
 import SubHeader from './SubHeader.astro'
@@ -82,7 +81,7 @@ import SubHeader from './SubHeader.astro'
 
       <div class='flex'>
         <div class='flex lg:hidden gap-2'>
-          <SearchDialog client:load aria-label='Search menu' />
+          <!-- <SearchDialog client:load aria-label='Search menu' /> -->
           <SettingsDropdown client:load aria-label='Settings menu' />
         </div>
         <ThemeToggle />

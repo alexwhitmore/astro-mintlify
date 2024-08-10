@@ -2,11 +2,6 @@ import type { SiteConfig } from '../types'
 
 const siteConfig: SiteConfig = {
   anchors: [
-    // {
-    //   name: 'Documentation',
-    //   icon: 'book',
-    //   url: 'https://mintlify.com/docs',
-    // },
     {
       name: 'Community',
       icon: 'discord',
@@ -20,11 +15,11 @@ const siteConfig: SiteConfig = {
   ],
   navigation: [
     {
-      group: 'Introduction',
+      group: 'Getting started',
       type: 'introduction',
       pages: [
         { name: 'Introduction', url: '/' },
-        { name: 'Getting Started', url: '/introduction/getting-started' },
+        { name: 'Getting Started', url: '/introduction/installation' },
         { name: 'Features', url: '/introduction/features' },
         { name: 'Guiding Principles', url: '/introduction/guiding-principles' },
       ],
