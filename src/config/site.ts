@@ -2,20 +2,20 @@ import type { SiteConfig } from '../types'
 
 const siteConfig: SiteConfig = {
   anchors: [
-    {
-      name: 'Documentation',
-      icon: 'book',
-      url: 'https://mintlify.com/docs',
-    },
+    // {
+    //   name: 'Documentation',
+    //   icon: 'book',
+    //   url: 'https://mintlify.com/docs',
+    // },
     {
       name: 'Community',
-      icon: 'slack',
-      url: 'https://mintlify.com/community',
+      icon: 'discord',
+      url: 'https://kcd.im/discord',
     },
     {
       name: 'Blog',
       icon: 'newspaper',
-      url: 'https://mintlify.com/blog',
+      url: 'https://kentcdodds.com/blog',
     },
   ],
   navigation: [
@@ -33,10 +33,10 @@ const siteConfig: SiteConfig = {
       type: 'core-concepts',
       pages: [
         { name: 'Authentication', url: '/core-concepts/authentication' },
-        { name: 'Database', url: '/database' },
-        { name: 'Routing', url: '/routing' },
-        { name: 'Caching', url: '/caching' },
-        { name: 'Email', url: '/email' },
+        { name: 'Database', url: '/core-concepts/database' },
+        { name: 'Routing', url: '/core-concepts/routing' },
+        { name: 'Caching', url: '/core-concepts/caching' },
+        { name: 'Email', url: '/core-concepts/email' },
       ],
     },
     {

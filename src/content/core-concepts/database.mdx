@@ -1,0 +1,122 @@
+---
+title: 'Database'
+date: '2024-06-28'
+description: 'Learn about database management in the Epic Stack.'
+draft: false
+type: 'core-concepts'
+---
+
+import GroupName from '../../components/docs/GroupName.astro'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
+
+<GroupName>Core Concepts</GroupName>
+
+# Database
+
+## Primary Instance
+
+The Epic Stack uses LiteFS, which operates with a "primary instance" that is the only instance that can write to the database. All other instances are "replicas" that can only read from the database. This is a common pattern for databases and is similar to how Fly's Postgres service works.
+
+The primary instance is determined by Fly's [consul](https://www.consul.io/) service and can change over time. By default, all instances are allowed to be primary instances. However, writes will be slower for people who are not geographically close to the primary instance, so the Epic Stack has configured consul to only allow instances in the primary region.
+
+When you initialize an Epic Stack app, it will ask you which region you wish to deploy to and this will set the `primary_region` in the `fly.toml` file. It is recommended that you deploy two instances in this region for zero downtime deploys.
+
+You can determine which instance is the primary instance by running:
+
+<CodeBlock code={`fly status --app [YOUR_APP_NAME]`} lang='bash' />
+
+To deploy more regions, you can use the `fly scale count` command. For example:
+
+<CodeBlock
+  code={`fly scale count 2 --region sjc
+fly scale count 1 --region ams`}
+  lang='bash'
+/>
+
+## Connecting to Your Production Database
+
+The SQLite database is located at `/data/litefs/dbs/sqlite.db` on the deployed application. You can connect to it using:
+
+<CodeBlock code={`fly ssh console -C database-cli`} lang='bash' />
+
+To connect using Prisma Studio:
+
+1. Run Prisma Studio on your Fly app:
+
+   <CodeBlock
+     code={`fly ssh console -C "npm run prisma:studio" --app [YOUR_APP_NAME]`}
+     lang='bash'
+   />
+
+2. Proxy your local port to Prisma Studio:
+
+   <CodeBlock code={`fly proxy 5556:5555 --app [YOUR_APP_NAME]`} lang='bash' />
+
+3. Open `http://localhost:5556` in your browser.
+
+## Migrations
+
+Migrations are handled by Prisma and run as part of the deploy process. The Epic Stack uses a "widen then narrow" strategy for schema migrations to ensure zero downtime deploys.
+
+## Seeding Production
+
+The Epic Stack initializes the database with `admin` and `user` roles. If you need to seed additional data, you can modify the `migration.sql` file directly or follow these steps:
+
+1. Create a custom seed script.
+2. Generate a temporary database with the desired data.
+3. Create a SQL dump of the seed database.
+4. Copy relevant parts into your `migration.sql` file.
+
+For existing databases, you can seed additional data without a migration by:
+
+1. Creating a new database file with the seed data.
+2. Creating a SQL dump of the seed database.
+3. Copying the dump to your production server.
+4. Importing the data using LiteFS.
+
+## Backups
+
+### LiteFS Cloud Backups
+
+LiteFS Cloud is a service offered by Fly.io for managing backup and restore functionality. It allows restoring your database to any point in the last 30 days, with 5-minute granularity.
+
+To set up LiteFS Cloud:
+
+1. Create a LiteFS Cloud cluster in your Fly.io dashboard.
+2. Set the `LITEFS_CLOUD_TOKEN` secret in your Fly app.
+
+### Manual DB Backups
+
+You can manually create backups using `litefs export`:
+
+<CodeBlock
+  code={`fly ssh console --app [YOUR_APP_NAME]
+mkdir /backups
+litefs export -name sqlite.db /backups/backup-2023-10-10.db
+exit
+fly ssh sftp get /backups/backup-2023-10-10.db --app [YOUR_APP_NAME]`}
+  lang='bash'
+/>
+
+### Manual DB Restoration
+
+To restore a database from a backup:
+
+<CodeBlock
+  code={`fly ssh sftp shell --app [YOUR_APP_NAME]
+put backup-2023-10-10.db
+fly ssh console --app [YOUR_APP_NAME]
+litefs import -name sqlite.db /backup-2023-10-10.db
+exit`}
+  lang='bash'
+/>
+
+## Troubleshooting
+
+If you encounter issues with Prisma migrations, you have several options:
+
+1. Delete the app and re-deploy after fixing the migration.
+2. Restore from a recent backup.
+3. For data-sensitive situations, follow a more complex process involving modifying the `litefs.yml` file and manually fixing the database.
+
+For detailed steps on troubleshooting, refer to the full documentation.

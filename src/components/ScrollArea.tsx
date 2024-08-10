@@ -1,4 +1,3 @@
-// SidebarContent.tsx
 import type { Anchor, NavigationItem } from '../types'
 import { Icon } from './Icon'
 import { ScrollArea } from './ui/scroll-area'
@@ -32,8 +31,15 @@ export function SidebarContent({
                   <a
                     href={anchor.url}
                     className='group flex gap-x-3 rounded-md py-1 px-2 text-sm font-medium leading-6 items-center text-muted-foreground hover:text-foreground'>
-                    <div className='border rounded-md p-1 group-hover:bg-primary/30 group-hover:text-primary'>
-                      <Icon iconName={anchor.icon} className='h-4 w-4' />
+                    <div className='border rounded-md p-1 group-hover:bg-primary/30'>
+                      <Icon
+                        iconName={anchor.icon}
+                        className={`${
+                          anchor.icon === 'discord'
+                            ? 'group-hover:fill-primary'
+                            : 'group-hover:text-primary'
+                        } h-4 w-4 text-muted-foreground`}
+                      />
                     </div>
                     {anchor.name}
                   </a>

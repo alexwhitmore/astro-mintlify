@@ -1,0 +1,62 @@
+---
+title: 'Email Configuration'
+date: '2024-06-28'
+description: 'Learn how to set up email functionality in the Epic Stack using Resend.'
+draft: false
+type: 'core-concepts'
+---
+
+import GroupName from '../../components/docs/GroupName.astro'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
+
+<GroupName>Core Concepts</GroupName>
+
+# Email Configuration
+
+The Epic Stack uses [Resend](https://resend.com) as its email provider. This document describes how to set up Resend for your application.
+
+> NOTE: During development, emails will be logged to the terminal. In production, if you haven't set the proper environment variables, you will receive a warning until you do so.
+
+## Setting Up Resend
+
+### Create an API Key
+
+First, you need to create an API key from Resend:
+
+1. Go to the [Resend API Keys page](https://resend.com/api-keys).
+2. Create a new API key.
+
+### Set Environment Variables
+
+Once you have your API key, you need to set it as an environment variable in both your production and staging environments:
+
+<CodeBlock
+  code={`fly secrets set RESEND_API_KEY="re_blAh_blaHBlaHblahBLAhBlAh" --app [YOUR_APP_NAME]
+fly secrets set RESEND_API_KEY="re_blAh_blaHBlaHblahBLAhBlAh" --app [YOUR_APP_NAME]-staging`}
+  lang='bash'
+/>
+
+Replace `[YOUR_APP_NAME]` with your Fly.io app name, and use your actual Resend API key.
+
+### Set Up a Custom Sending Domain
+
+1. Go to the [Resend Domains page](https://resend.com/domains).
+2. Set up a custom sending domain.
+
+### Update Email Configuration
+
+After setting up your custom domain, you need to update the `from` email address in your application:
+
+1. Open `app/utils/email.server.ts`
+2. Update the `from` email address to the one you want your emails to come from.
+
+### Update Tests
+
+If you have tests checking the `from` email address, make sure to update those as well:
+
+1. Open `tests/e2e/onboarding.test.ts`
+2. Update the `expect(email.from).toBe` assertion with your new `from` email address.
+
+## Conclusion
+
+With these steps completed, your Epic Stack application should be properly configured to send emails using Resend. Remember to test your email functionality thoroughly in both staging and production environments to ensure everything is working as expected.
