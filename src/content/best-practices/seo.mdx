@@ -1,13 +1,82 @@
 ---
-title: 'Toasts'
+title: 'SEO'
 date: '2024-06-28'
-description: 'Learn how to use toast notifications in the Epic Stack for temporary user notifications.'
+description: 'Learn how to optimize your Epic Stack application for search engines using Remix and additional tools.'
 draft: false
 type: 'Best Practices'
 ---
 
 import GroupName from '../../components/docs/GroupName.astro'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
 
 <GroupName>Best Practices</GroupName>
 
 # SEO
+
+The Epic Stack provides robust support for Search Engine Optimization (SEO) through built-in Remix features and additional tools.
+
+## Meta Tags
+
+Remix has built-in support for setting up `meta` tags on a per-route basis. This allows you to customize metadata for each page of your application.
+
+For more information, refer to the [Remix Metadata docs](https://remix.run/docs/en/main/route/meta).
+
+## Robots.txt and Sitemap.xml
+
+The Epic Stack includes built-in support for `/robots.txt` and `/sitemap.xml` using [resource routes](https://remix.run/docs/en/main/guides/resource-routes) with the [`@nasa-gcn/remix-seo`](https://github.com/nasa-gcn/remix-seo) package.
+
+By default, all routes are included in the `sitemap.xml` file. However, you can configure which routes are included using the `handle` export in the route file.
+
+> Note: Only public-facing pages should be included in the `sitemap.xml` file.
+
+## Customizing Sitemap Entries
+
+Here are two examples of how to customize the sitemap on a per-route basis:
+
+### Example 1: Adding Dynamic Entries
+
+<CodeBlock
+  code={`// routes/blog/$blogslug.tsx
+import type { SEOHandle } from '@nasa-gcn/remix-seo'
+
+export const handle: SEOHandle = {
+  getSitemapEntries: async (request) => {
+    const blogs = await db.blog.findMany()
+    return blogs.map((blog) => {
+      return { route: \`/blog/\${blog.slug}\`, priority: 0.7 }
+    })
+  },
+}`}
+  lang="tsx"
+/>
+
+This example demonstrates how to dynamically generate sitemap entries for blog posts.
+
+### Example 2: Excluding a Route from Sitemap
+
+<CodeBlock
+  code={`// in your routes/url-that-doesnt-need-sitemap.tsx
+import type { SEOHandle } from '@nasa-gcn/remix-seo'
+import type { LoaderFunctionArgs } from '@remix-run/node'
+
+export let loader = ({ request }: LoaderFunctionArgs) => {
+  /**/
+}
+
+export const handle: SEOHandle = {
+  getSitemapEntries: () => null,
+}`}
+  lang="tsx"
+/>
+
+This example shows how to exclude a specific route from the sitemap.
+
+## Best Practices
+
+1. Ensure all public-facing pages have appropriate meta tags.
+2. Regularly review and update your `sitemap.xml` to reflect changes in your site structure.
+3. Use dynamic sitemap generation for content that changes frequently.
+4. Exclude sensitive or non-public routes from your sitemap.
+5. Monitor your site's performance in search engines and adjust your SEO strategy as needed.
+
+By leveraging these SEO features in your Epic Stack application, you can improve your site's visibility and ranking in search engine results.

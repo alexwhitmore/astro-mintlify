@@ -79,8 +79,8 @@ const siteConfig: SiteConfig = {
       group: 'Best Practices',
       type: 'best-practices',
       pages: [
-        { name: 'SEO', url: '/best-practices/seo' },
         { name: 'Security', url: '/best-practices/security' },
+        { name: 'SEO', url: '/best-practices/seo' },
         { name: 'Testing', url: '/best-practices/testing' },
         { name: 'Timezone Handling', url: '/best-practices/timezone-handling' },
       ],

@@ -1,13 +1,79 @@
 ---
-title: 'Toasts'
+title: 'Security'
 date: '2024-06-28'
-description: 'Learn how to use toast notifications in the Epic Stack for temporary user notifications.'
+description: 'Learn about the security measures implemented in the Epic Stack to protect your users and application.'
 draft: false
 type: 'Best Practices'
 ---
 
 import GroupName from '../../components/docs/GroupName.astro'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
 
 <GroupName>Best Practices</GroupName>
 
 # Security
+
+The Epic Stack implements several security measures to protect your users and application. This document outlines some of these measures and how to use them effectively.
+
+## Content Security Policy (CSP)
+
+The Epic Stack uses a strict [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) to control which resources can be loaded.
+
+- By default, CSP is set to `report-only` mode.
+- It's recommended to enable CSP in `server/index.ts` by removing the `reportOnly: true` option.
+
+## Fly's Internal Network
+
+The Epic Stack leverages Fly's internal network for secure communication between services.
+
+- Only services within your organization have access to this network.
+- Instances communicate with each other over this internal network.
+- An endpoint allows instances to update the cache in the primary region using internal URLs and a shared secret for validation.
+
+## Secrets Management
+
+The current recommended approach for managing secrets:
+
+- Place secrets in a `.env` file in the root of the application (which is `.gitignore`d).
+- Use `.env.example` as a template.
+- Set secrets on Fly using the `fly secrets` command.
+
+> Note: This approach has limitations and may be improved in the future.
+
+## Cross-Site Scripting (XSS) Protection
+
+React provides built-in XSS protection by escaping all values by default.
+
+- Use the `dangerouslySetInnerHTML` prop cautiously when rendering HTML.
+- Never pass user-generated content to this prop.
+
+## Cross-Site Request Forgery (CSRF) Prevention
+
+The Epic Stack uses [`remix-utils`](https://github.com/sergiodxa/remix-utils) [CSRF-related utilities](https://github.com/sergiodxa/remix-utils#csrf) to prevent CSRF attacks.
+
+## Honeypot Fields
+
+Honeypot fields are implemented using [`remix-utils`](https://github.com/sergiodxa/remix-utils) [honeypot-related utilities](https://github.com/sergiodxa/remix-utils#form-honeypot) to detect and prevent automated form submissions.
+
+## Rate Limiting
+
+The Epic Stack implements rate limiting to prevent API abuse.
+
+- Configured in `server/index.ts`.
+- Uses [`express-rate-limit`](https://npm.im/express-rate-limit) with an in-memory store by default.
+- Can be easily modified to use external stores like Redis for more robust rate limiting.
+
+<CodeBlock
+  code={`// Example rate limiting configuration
+import rateLimit from 'express-rate-limit'
+
+const limiter = rateLimit({
+windowMs: 15 _ 60 _ 1000, // 15 minutes
+max: 100 // limit each IP to 100 requests per windowMs
+});
+
+app.use(limiter);`}
+lang="typescript"
+/>
+
+By implementing these security measures, the Epic Stack provides a robust foundation for building secure web applications. It's important to regularly review and update these security practices as your application evolves and new threats emerge.
