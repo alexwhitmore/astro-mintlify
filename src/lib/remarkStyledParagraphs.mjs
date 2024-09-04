@@ -1,4 +1,3 @@
-// remarkStyledElements.mjs
 import { visit } from 'unist-util-visit'
 
 export default function remarkStyledElements() {

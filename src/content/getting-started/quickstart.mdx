@@ -1,68 +1,102 @@
 ---
 title: 'Quickstart'
 date: '2024-06-28'
-description: 'The documentation for getting started quickly with this template.'
+description: 'Learn how to set up and start using this powerful documentation template.'
 draft: false
-type: getting-started
+type: Getting Started
 ---
 
 import {
-  Brush,
+  SquarePen,
+  SwatchBook,
   Code,
-  LineChart,
-  PanelTop,
-  ChevronLeft,
-  ChevronRight,
+  Rocket,
+  Image,
+  BookOpen,
+  Zap,
 } from 'lucide-react'
+import GroupName from '../../components/docs/GroupName.astro'
+import CodeBlock from '../../components/docs/CodeBlock.astro'
+import Callout from '../../components/docs/Callout'
+import ExternalLink from '../../components/docs/ExternalLink.astro'
+import DocsAccordion from '../../components/docs/Accordion.tsx'
 import Card from '../../components/Card.astro'
 import CardGrid from '../../components/docs/CardGrid.astro'
-import GroupName from '../../components/docs/GroupName.astro'
-
-<GroupName>Getting Started</GroupName>
-
-## Quickstart
 
 Start building awesome documentation in under 5 minutes
 
+<Callout
+  variant='warning'
+  alertTitle='Prerequisites'
+  alertDescription='Before you begin, make sure you have Node.js (v18.17.1 or v20.3.0) installed on your system.'
+/>
+
 ## Setup your development
 
-Learn how to update your docs locally and and deploy them to the public.
+Learn how to update your docs locally and deploy them to the public.
 
-### Edit and preview
+1. Clone the repository
 
-Accordion Placeholder
+<CodeBlock
+  code={`git clone https://github.com/alexwhitmore/astro-mintlify.git`}
+  lang='bash'
+/>
 
-### Edit and preview
+2.  Navigate to the project directory
 
-Accordion Placeholder
+<CodeBlock code={`cd astro-mintlify`} lang='bash' />
 
-## Update your docs
+3. Install the dependencies
 
-Add content directly in your files with MDX syntax and React components. You can use any of our components, or even build your own.
+<CodeBlock code={`npm install`} lang='bash' />
+
+4. Start your development server
+
+<CodeBlock code={`npm run dev`} lang='bash' />
+
+Once the server starts, you can view your documentation site at `http://localhost:4321`.
+
+## What to do next
+
+Now that you have your documentation site up and running, here are some next steps to make it your own:
 
 <CardGrid>
   <Card
-    header='Customize Style'
-    content="Customize your docs to your company's colors and brands"
+    header='Add your first page'
+    content='Learn how to create and organize new documentation pages.'
+    href='/essentials/creating-pages'
     withIcon>
-    <Brush className='stroke-primary' />
+    <SquarePen className='stroke-primary' />
   </Card>
   <Card
-    header='Reference APIs'
-    content='Automatically generate endpoints from an OpenAPI spec'
+    header='Customize your style'
+    content="Tailor your docs to match your brand's colors and aesthetics."
+    href='/essentials/theming'
+    withIcon>
+    <SwatchBook className='stroke-primary' />
+  </Card>
+  <Card
+    header='Use custom components'
+    content='Enhance your docs with pre-built and custom components.'
+    href='/essentials/components'
     withIcon>
     <Code className='stroke-primary' />
   </Card>
   <Card
-    header='Add Components'
-    content='Build interactive features and designs to guide your users'
+    header='Add images and media'
+    content='Learn how to include images, videos, and other media in your docs.'
+    href='/essentials/images'
     withIcon>
-    <LineChart className='stroke-primary' />
-  </Card>
-  <Card
-    header='Get Inspiration'
-    content='Check out our showcase of our favorite documentation'
-    withIcon>
-    <PanelTop className='stroke-primary' />
+    <Image className='stroke-primary' />
   </Card>
 </CardGrid>
+
+## Need Help?
+
+If you encounter any issues or have questions, check out our <ExternalLink url="/community/faq">FAQ</ExternalLink> or <ExternalLink url="https://github.com/alexwhitmore/astro-mintlify/issues">open an issue</ExternalLink> on GitHub.
+
+<Callout
+  variant='note'
+  alertTitle='Support the project'
+  alertDescription="Remember to star the project on GitHub if you're enjoying it!"
+/>

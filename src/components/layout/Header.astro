@@ -1,5 +1,5 @@
 ---
-import { ChevronRight, Command, Search } from 'lucide-react'
+import { ChevronRight, Command, Orbit, Search } from 'lucide-react'
 import { SettingsDropdown } from '../SettingsDropdown'
 import ThemeToggle from '../ThemeToggle.astro'
 import SubHeader from './SubHeader.astro'
@@ -8,38 +8,16 @@ import SubHeader from './SubHeader.astro'
 <header class='fixed shrink-0 w-full z-50 bg-background'>
   <nav class='px-4 h-14 lg:px-0'>
     <div class='flex justify-between items-center h-full border-b lg:px-10'>
-      <div>
+      <div class='flex items-center h-full'>
         <a
           href='/'
-          class='flex gap-2 items-center'
+          class='flex gap-2 items-center h-full'
           aria-label='Astro documentation'>
-          <div class='w-8 h-8 hidden dark:block'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 65 65'
-              ><path
-                fill='#FFF'
-                d='M39.445 25.555 37 17.163 65 0 47.821 28l-8.376-2.445Zm-13.89 0L28 17.163 0 0l17.179 28 8.376-2.445Zm13.89 13.89L37 47.837 65 65 47.821 37l-8.376 2.445Zm-13.89 0L28 47.837 0 65l17.179-28 8.376 2.445Z'
-              ></path></svg
-            >
-          </div>
+          <Orbit className='w-8 h-8' />
 
-          <div class='w-8 h-8 dark:hidden block'>
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 65 65'
-              ><path
-                fill='#000'
-                d='M39.445 25.555 37 17.163 65 0 47.821 28l-8.376-2.445Zm-13.89 0L28 17.163 0 0l17.179 28 8.376-2.445Zm13.89 13.89L37 47.837 65 65 47.821 37l-8.376 2.445Zm-13.89 0L28 47.837 0 65l17.179-28 8.376 2.445Z'
-              ></path></svg
-            >
-          </div>
-
-          <h4 class='text-xl'>
-            <span class='font-extrabold'>Epic</span>
-            <span class='font-normal'>Stack</span>
+          <h4 class='text-xl flex items-center'>
+            <span class='font-extrabold'>astro</span>
+            <span class='font-normal'>docs</span>
           </h4>
         </a>
       </div>
@@ -62,14 +40,14 @@ import SubHeader from './SubHeader.astro'
         </div>
       </div>
 
-      <div class='hidden lg:flex gap-2 items-center'>
+      <div class='hidden lg:flex gap-2 items-center h-full'>
         <a
-          href='/miscellaneous/community'
+          href='https://x.com/theAlexWhitmore'
           class='hidden h-8 rounded-md px-3 text-sm lg:inline-flex items-center justify-center whitespace-nowrap font-medium transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50'
           >Support</a
         >
         <a
-          href='https://github.com/epicweb-dev/epic-stack'
+          href='https://github.com/alexwhitmore/astro-mintlify'
           type='button'
           target='_blank'
           rel='noopener noreferrer'
@@ -79,9 +57,8 @@ import SubHeader from './SubHeader.astro'
         </a>
       </div>
 
-      <div class='flex'>
+      <div class='flex items-center h-full'>
         <div class='flex lg:hidden gap-2'>
-          <!-- <SearchDialog client:load aria-label='Search menu' /> -->
           <SettingsDropdown client:load aria-label='Settings menu' />
         </div>
         <ThemeToggle />

@@ -1,8 +1,8 @@
 ---
 import { ChevronRight } from 'lucide-react'
-import site from '../../config/site'
 import { getCurrentPageInfo } from '../../lib/utils'
 import { MenuButton } from '../MenuButton'
+const site = import.meta.env.SITE_CONFIG
 
 const currentUrl = Astro.url.pathname.replace(/^\/|\/$/g, '')
 const pageInfo = getCurrentPageInfo(currentUrl, site)

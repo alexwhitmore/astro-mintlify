@@ -1,37 +1,53 @@
 ---
-import { getCollection } from 'astro:content'
+import type { GetStaticPathsResult } from 'astro'
+import { getCollection, type CollectionEntry } from 'astro:content'
 import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
-import { getCollections, isValidCollectionType } from '../../lib/collections'
 import { generateToc } from '../../lib/toc'
-import { type AnyCollectionEntry } from '../../types'
+import {
+  ensureCollectionType,
+  getCollectionTypes,
+  type SiteConfig,
+} from '../../types'
 
-export async function getStaticPaths() {
-  const collections = getCollections()
-  const allPages = await Promise.all(
-    collections.map(async (collection) => {
-      if (isValidCollectionType(collection)) {
-        const pages = await getCollection(collection)
-        return pages.map((page) => ({
-          params: { type: collection, slug: page.slug },
-          props: { page, type: collection },
-        }))
-      }
-      return []
+export async function getStaticPaths(): Promise<GetStaticPathsResult> {
+  const siteConfig: SiteConfig = import.meta.env.SITE_CONFIG
+  const collectionTypes = getCollectionTypes(siteConfig)
+
+  const allPaths = await Promise.all(
+    collectionTypes.map(async (type) => {
+      const collection = await getCollection(ensureCollectionType(type))
+      return collection.map((entry) => ({
+        params: { type, slug: entry.slug },
+        props: { entry, type },
+      }))
     })
   )
-  return allPages.flat()
+
+  return allPaths.flat()
 }
 
-type Props = {
-  page: AnyCollectionEntry
+interface Props {
+  entry: CollectionEntry<ReturnType<typeof ensureCollectionType>>
   type: string
 }
 
-const { page } = Astro.props
-const { Content, headings } = await page.render()
+const { type } = Astro.params
+const { entry } = Astro.props
+
+const { Content, headings } = await entry.render()
 const tocItems = generateToc(headings)
+
+const siteConfig: SiteConfig = import.meta.env.SITE_CONFIG
+const groupInfo = siteConfig.navigation.find((nav) => nav.type === type)
+
+if (!groupInfo) {
+  throw new Error(`No group info found for type: ${type}`)
+}
 ---
 
-<DocumentationLayout title={page.data.title} toc={tocItems}>
+<DocumentationLayout
+  title={entry.data.title}
+  toc={tocItems}
+  type={entry.data.type}>
   <Content />
 </DocumentationLayout>

@@ -100,7 +100,7 @@ h2 ~ p {
 }
 
 h3 {
-  @apply pt-5;
+  @apply pt-0;
 }
 
 code:not(pre code) {

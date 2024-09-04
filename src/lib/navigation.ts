@@ -1,4 +1,5 @@
-import siteConfig from '../config/site'
+import type { SiteConfig } from '../types'
+const siteConfig: SiteConfig = import.meta.env.SITE_CONFIG
 
 export function getPrevNextPage(url: string) {
   const basePath = import.meta.env.BASE_URL || '/'

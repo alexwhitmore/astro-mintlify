@@ -1,5 +1,5 @@
 import { defineCollection, z } from 'astro:content'
-import { COLLECTION_TYPES } from '../config/site'
+import type { CollectionTypes, SiteConfig } from '../types'
 
 const docsSchema = z.object({
   title: z.string(),
@@ -10,9 +10,17 @@ const docsSchema = z.object({
 
 export type DocsSchema = z.infer<typeof docsSchema>
 
-export const collections = Object.fromEntries(
-  COLLECTION_TYPES.map((type) => [
-    type,
-    defineCollection({ schema: docsSchema }),
-  ])
-)
+export function createCollections<T extends SiteConfig>(siteConfig: T) {
+  const COLLECTION_TYPES = siteConfig.navigation.map(
+    (nav) => nav.type
+  ) as CollectionTypes<T>[]
+
+  return Object.fromEntries(
+    COLLECTION_TYPES.map((type) => [
+      type,
+      defineCollection({ schema: docsSchema }),
+    ])
+  ) as { [K in CollectionTypes<T>]: ReturnType<typeof defineCollection> }
+}
+
+export const collections: ReturnType<typeof createCollections> = {}

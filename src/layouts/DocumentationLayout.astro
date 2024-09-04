@@ -1,19 +1,22 @@
 ---
 import Sidebar from '../components/Sidebar.astro'
 import Toc from '../components/Toc.astro'
+import GroupName from '../components/docs/GroupName.astro'
+import PrevNextLinks from '../components/docs/Links.astro'
 import Footer from '../components/layout/Footer.astro'
 import Header from '../components/layout/Header.astro'
 import type { TocItem } from '../lib/toc'
+import type { SiteConfig } from '../types'
 import MainLayout from './MainLayout.astro'
-import siteConfig from '../config/site'
+const siteConfig: SiteConfig = import.meta.env.SITE_CONFIG
 
 interface Props {
   toc: TocItem[]
   title: string
+  type?: string
 }
 
-const { toc, title } = Astro.props
-import PrevNextLinks from '../components/docs/Links.astro'
+const { toc, title, type } = Astro.props
 ---
 
 <MainLayout title={title}>
@@ -23,6 +26,8 @@ import PrevNextLinks from '../components/docs/Links.astro'
     <main
       class='col-span-12 xl:col-span-9 px-4 lg:px-10 mt-32 lg:pl-72 lg:ml-10'>
       <div class='min-h-screen'>
+        <GroupName>{type}</GroupName>
+        <h1>{title}</h1>
         <slot />
       </div>
       <PrevNextLinks />

@@ -1,6 +1,5 @@
 import { Menu, Orbit } from 'lucide-react'
 import { Icon } from '../components/Icon'
-import siteConfig from '../config/site'
 import {
   Sheet,
   SheetContent,
@@ -9,6 +8,7 @@ import {
   SheetTrigger,
 } from './ui/Sheet'
 import { ScrollArea } from './ui/scroll-area'
+const siteConfig = import.meta.env.SITE_CONFIG
 
 const { anchors, navigation } = siteConfig
 
@@ -24,7 +24,7 @@ export const MenuButton = ({ path }: { path: string }) => {
         <SheetContent side='left'>
           <SheetHeader>
             <SheetTitle className='text-left flex gap-2 items-center'>
-              <Orbit className='w-4 h-4' />
+              <Orbit className='w-6 h-6' />
               astro docs
             </SheetTitle>
           </SheetHeader>

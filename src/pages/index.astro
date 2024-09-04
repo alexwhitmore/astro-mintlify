@@ -1,13 +1,35 @@
 ---
-import { getEntry } from 'astro:content'
+import { getCollection } from 'astro:content'
 import DocumentationLayout from '../layouts/DocumentationLayout.astro'
 import { generateToc } from '../lib/toc'
+import type { SiteConfig } from '../types'
+import { ensureCollectionType } from '../types'
 
-const entry = await getEntry('getting-started', 'index')
+const siteConfig: SiteConfig = import.meta.env.SITE_CONFIG
+
+const homeNavItem = siteConfig.navigation[0]
+if (!homeNavItem) {
+  throw new Error('No navigation items found in site configuration.')
+}
+
+const homeCollection = ensureCollectionType(homeNavItem.type)
+const entries = await getCollection(homeCollection)
+
+const entry = entries.find((entry) => entry.slug === 'index') || entries[0]
+
+if (!entry) {
+  throw new Error(
+    `No content found for the home page (type: ${homeCollection})`
+  )
+}
+
 const { Content, headings } = await entry.render()
 const tocItems = generateToc(headings)
 ---
 
-<DocumentationLayout title={entry.data.title} toc={tocItems}>
+<DocumentationLayout
+  title={entry.data.title}
+  toc={tocItems}
+  type={entry.data.type}>
   <Content />
 </DocumentationLayout>

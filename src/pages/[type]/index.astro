@@ -1,30 +1,26 @@
 ---
 import { getCollection } from 'astro:content'
-import siteConfig from '../../config/site'
 import DocumentationLayout from '../../layouts/DocumentationLayout.astro'
-import { getCollections, isValidCollectionType } from '../../lib/collections'
-import { type AnyCollectionEntry } from '../../types'
+import { ensureCollectionType, type SiteConfig } from '../../types'
 
 export async function getStaticPaths() {
-  return getCollections().map((type) => ({
-    params: { type },
+  const siteConfig: SiteConfig = import.meta.env.SITE_CONFIG
+  return siteConfig.navigation.map((nav) => ({
+    params: { type: nav.type },
   }))
 }
 
 const { type } = Astro.params as { type: string }
-let pages: AnyCollectionEntry[] = []
-if (isValidCollectionType(type)) {
-  pages = await getCollection(type)
-} else {
-  throw new Error(`Invalid collection type: ${type}`)
-}
+const siteConfig: SiteConfig = import.meta.env.SITE_CONFIG
 
 const groupInfo = siteConfig.navigation.find((nav) => nav.type === type)
 if (!groupInfo) {
   throw new Error(`No group info found for type: ${type}`)
 }
 
-// Generate a TOC from the page titles
+const collectionType = ensureCollectionType(type)
+const pages = await getCollection(collectionType)
+
 const tocItems = pages.map((page) => ({
   depth: 2,
   slug: page.slug,
