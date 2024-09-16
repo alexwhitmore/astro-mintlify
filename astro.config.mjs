@@ -50,16 +50,6 @@ export default defineConfig({
             { name: 'Deployments', url: '/essentials/deployments' },
           ],
         },
-        {
-          group: 'My New Page',
-          type: 'my-new-page',
-          pages: [
-            {
-              name: 'Good Documentation',
-              url: '/my-new-page/good-documentation',
-            },
-          ],
-        },
       ],
     }),
   ],
