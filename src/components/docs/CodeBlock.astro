@@ -1,5 +1,4 @@
 ---
-// Select new themes from here: https://shiki.style/themes
 import { Code } from 'astro:components'
 import { Copy, Check } from 'lucide-react'
 import type {
@@ -28,7 +27,7 @@ if (!hasTabs && !singleCode) {
   console.error('CodeBlock: Either tabs or code and lang must be provided')
 }
 
-const id = `codeblock-${Math.random().toString(36).substr(2, 9)}`
+const id = `codeblock-${Math.random().toString(36).substring(2, 9)}`
 ---
 
 <div

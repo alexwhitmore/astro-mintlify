@@ -3,7 +3,101 @@ title: 'Create a page'
 date: '2024-06-28'
 description: 'Learn more about this documentation template.'
 draft: false
-type: Essentials
+type: 'Essentials'
 ---
 
-Placeholder for the Create a page docs!
+import CodeBlock from '../../components/docs/CodeBlock.astro'
+import Callout from '../../components/docs/Callout'
+import { Image } from 'astro:assets'
+import createPage from '../../assets/astro-docs.mp4'
+
+Creating documentation pages has never been easier and only requires 3 steps!
+
+## Understanding the Astro Config File
+
+In the root directory of your project, find the `astro.config.mjs` file. You should already be set up to use the `astroDocs` configuration package which has an anchors array and a navigation array.
+
+<CodeBlock
+  code={`// astro.config.mjs
+export default defineConfig({
+...
+  astroDocs({
+    ...
+    anchors: [{}],
+    navigation: [
+      {
+        group: 'Getting Started',
+        type: 'getting-started',
+        pages: [
+          { name: 'Introduction', url: '/' },
+          { name: 'Quickstart', url: '/getting-started/quickstart'}
+        ],
+      }
+    ],
+  })
+...
+})`}
+  lang='javascript'
+/>
+
+## Adding a New Page to Navigation
+
+Add a new object to the `navigation` array with a group, type, and pages section.
+
+<CodeBlock
+  code={`// astro.config.mjs
+export default defineConfig({
+...
+  astroDocs({
+    ...
+    anchors: [{}],
+    navigation: [
+      ...
+      {
+        group: 'My New Page',
+        type: 'my-new-page',
+        pages: [
+          { name: 'Good Documentation', url: '/my-new-page/good-documentation' },
+        ],
+      }
+    ],
+  })
+...
+})`}
+  lang='javascript'
+/>
+
+<Callout
+  variant='warning'
+  alertTitle='Breaking changes'
+  alertDescription='This is subject to change in the future to make it less verbose.'
+/>
+
+## Creating and Writing Your New Page
+
+In `src/content/` create a new folder called `my-new-page` with a new file inside called `good-documentation.(mdx|md)`. Inside the file can look like:
+
+<CodeBlock
+  code={`---
+title: 'Good Documentation'
+date: '2024-09-15'
+description: 'Learn more about how you can create really good documentation.'
+draft: false
+type: 'My New Page'
+---
+
+# This is your page!`}
+
+lang='javascript'
+/>
+
+You can now navigate to `http://localhost:4321/my-new-page/good-documentation` to view your changes!
+
+<video
+  src={createPage}
+  autoplay
+  loop
+  muted
+  playsinline
+  alt='Example of toast notifications'
+/>
